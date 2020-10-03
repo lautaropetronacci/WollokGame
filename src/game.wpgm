@@ -1,8 +1,6 @@
 import wollok.game.*
-import pepita.*
+import Dontwhackthecapybara.*
 
 program game {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.start()
+	dontwhackthecapybara.iniciar()
 }
