@@ -63,7 +63,7 @@ object pepita {
 	method aplastadoPorMartillo() {
 	}
  }
- 
+
  object carpincho {
  	
 	const movimiento = aleatorio
