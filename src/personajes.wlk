@@ -54,6 +54,7 @@ object pepita {
  }
  
  object topo { 	
+ 	const position = game.at(2, 2)
 	const movimiento = aleatorio
 
 	method position() = movimiento.posicion()

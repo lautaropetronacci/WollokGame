@@ -8,10 +8,10 @@ object aleatorio {
 	method posicion() = posicion
 
 	method nuevaPosicion() {
-		// calculo coordenadas aleatorias dentro la pantalla
-		const x = 0.randomUpTo(game.width(2))
-		const y = 0.randomUpTo(game.height(3))
-		// cambio a nueva posicion
+		
+		const x = 0.randomUpTo(2)
+		const y = 0.randomUpTo(3)
+		
 		posicion = game.at(x, y)
 	}
 

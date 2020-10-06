@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><projectDescription>
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
 	<name>2020-o-tpi-juego-los4fantasticos</name>
-	<comment/>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -31,4 +32,16 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>assets/martillo.png</name>
+			<type>1</type>
+			<location>C:/universidad lauti/paradigmas de programacion/objetos/wollok game/png-clipart-striking-mallet-hammer-cartoon-cute-cartoon-hammer-cartoon-character-cartoons.png</location>
+		</link>
+		<link>
+			<name>assets/topo.png</name>
+			<type>1</type>
+			<location>C:/universidad lauti/paradigmas de programacion/objetos/wollok game/unnamed (1).png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
