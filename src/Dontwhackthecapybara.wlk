@@ -16,6 +16,7 @@ object dontwhackthecapybara {
 		game.title("Don't whack the capybara")
 		game.width(5)
 		game.height(5)
+		game.cellSize(150)
 	}
 
 	method agregarPersonajes() {
