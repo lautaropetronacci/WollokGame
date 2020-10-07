@@ -16,10 +16,12 @@ object dontwhackthecapybara {
 		game.title("Don't whack the capybara")
 		game.width(5)
 		game.height(5)
-		game.cellSize(150)
+		game.cellSize(200)
 	}
 
 	method agregarPersonajes() {
+		game.addVisual(topo)
+		game.addVisual(carpincho)
 		game.addVisual(martillo)
 	}
 
@@ -34,8 +36,8 @@ object dontwhackthecapybara {
 	}
 
 	method configurarAcciones() {
-		game.onTick(4000, "mover aleatoriamente", { aleatorio.nuevaPosicion()})
-		
+		game.onTick(3000, "mover aleatoriamente", { aleatorio.nuevaPosicion()})
+		game.onTick(5000, "mover aleatoriamente carpincho", { aleatorioxd.nuevaPosicion()})
 	}
 
 }
