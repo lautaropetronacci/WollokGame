@@ -9,8 +9,8 @@ object aleatorio {
 
 	method nuevaPosicion() {
 		
-		const x = 0.randomUpTo(2)
-		const y = 0.randomUpTo(3)
+		const x = 0.randomUpTo(3).truncate(0);
+		const y = 0.randomUpTo(4).truncate(0);
 		
 		posicion = game.at(x, y)
 	}
@@ -25,10 +25,16 @@ object aleatorioxd {
 
 	method nuevaPosicion() {
 		
-		const x = 0.randomUpTo(2)
-		const y = 0.randomUpTo(3)
+		const x = 0.randomUpTo(3).truncate(0);
+		const y = 0.randomUpTo(4).truncate(0);
 		
 		posicion = game.at(x, y)
 	}
 
 }
+
+object posicionFueraDeMapa {
+    const posicion = game.at(3, 3)
+    method posicion() = posicion
+}
+

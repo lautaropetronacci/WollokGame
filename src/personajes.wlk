@@ -20,12 +20,12 @@ object pepita {
  }
  
  object vida {
- 	var cantidadDeVida = 1
+ 	var cantidadDeVida = 3
  	
  	method cantidadDeVida() = cantidadDeVida
  	
  	method pierdeVida() {
- 		cantidadDeVida -= 1
+ 		cantidadDeVida -= 1	
  	}
  }
  
@@ -45,11 +45,13 @@ object pepita {
  	method golpe() {
  		imagen = "martilloGolpeando.png"
  		game.schedule(500, { imagen = "martillo.png"})
- 		if (topo.position() == position){
- 			topo.aplastadoPorMartillo()
- 		}
- 		else if (carpincho.position() == position) {
+ 		//game.onCollideDo(self, { chocaCon => chocaCon.aplastadoPorMartillo()})
+ 		
+ 		if (carpincho.position() == self.position()) {
  			carpincho.aplastadoPorMartillo()
+ 		}
+ 		else if (topo.position() == self.position()){
+ 			topo.aplastadoPorMartillo()
  		}
  	}
  }
@@ -57,34 +59,38 @@ object pepita {
  object topo { 	 	
  	const imagen = "topo.png"
 
-	const movimiento = aleatorio
+	var movimiento = aleatorio
 
 	method position() = movimiento.posicion()
 
 	method image() = imagen
 
 	method aplastadoPorMartillo() {
-		game.removeVisual(self)
+		//game.removeVisual(self)
+		movimiento = posicionFueraDeMapa
+		game.schedule(4350, { movimiento = aleatorio})
  		puntuacion.topoAplastado()
- 		game.schedule(8000, { game.addVisual(self)})
+ 		//game.schedule(2000, { game.addVisual(self)})
 	}
  }
 
  object carpincho {
  	
-	const movimiento = aleatorioxd
+	var movimiento = aleatorioxd
 
 	method position() = movimiento.posicion()
 
 	method image() = "carpincho.png"
 
 	method aplastadoPorMartillo() {
-		game.removeVisual(self)
+		movimiento = posicionFueraDeMapa
+		game.schedule(4800, { movimiento = aleatorioxd})
+		//game.removeVisual(self)
  		vida.pierdeVida()
  		if (vida.cantidadDeVida() == 0){
  			game.say(self, "esto te pasa por tocar al carpincho")
  			game.schedule(5000, { game.stop()})
  		}
- 		game.schedule(8000, { game.addVisual(self)})
+ 		//game.schedule(8000, { game.addVisual(self)})
 	}
  }
