@@ -53,13 +53,21 @@ object pepita {
  		else if (topo.position() == self.position()){
  			topo.aplastadoPorMartillo()
  		}
+ 		else if (topo2.position() == self.position()){
+ 			topo2.aplastadoPorMartillo()
+ 		}
+ 		else if (topo3.position() == self.position()){
+ 			topo3.aplastadoPorMartillo()
+ 		}
  	}
  }
  
  object topo { 	 	
  	const imagen = "topo.png"
 
-	var movimiento = aleatorio
+	const property movimientoAleatorio = new Aleatorio()
+
+	var movimiento = movimientoAleatorio
 
 	method position() = movimiento.posicion()
 
@@ -68,7 +76,47 @@ object pepita {
 	method aplastadoPorMartillo() {
 		//game.removeVisual(self)
 		movimiento = posicionFueraDeMapa
-		game.schedule(4350, { movimiento = aleatorio})
+		game.schedule(3800, { movimiento = movimientoAleatorio})
+ 		puntuacion.topoAplastado()
+ 		//game.schedule(2000, { game.addVisual(self)})
+	}
+ }
+ 
+  object topo2 { 	 	
+ 	const imagen = "topo.png"
+
+	const property movimientoAleatorio = new Aleatorio()
+
+	var movimiento = movimientoAleatorio
+
+	method position() = movimiento.posicion()
+
+	method image() = imagen
+
+	method aplastadoPorMartillo() {
+		//game.removeVisual(self)
+		movimiento = posicionFueraDeMapa
+		game.schedule(3800, { movimiento = movimientoAleatorio})
+ 		puntuacion.topoAplastado()
+ 		//game.schedule(2000, { game.addVisual(self)})
+	}
+ }
+ 
+  object topo3 { 	 	
+ 	const imagen = "topo.png"
+
+	const property movimientoAleatorio = new Aleatorio()
+
+	var movimiento = movimientoAleatorio
+
+	method position() = movimiento.posicion()
+
+	method image() = imagen
+
+	method aplastadoPorMartillo() {
+		//game.removeVisual(self)
+		movimiento = posicionFueraDeMapa
+		game.schedule(3800, { movimiento = movimientoAleatorio})
  		puntuacion.topoAplastado()
  		//game.schedule(2000, { game.addVisual(self)})
 	}
@@ -76,7 +124,9 @@ object pepita {
 
  object carpincho {
  	
-	var movimiento = aleatorioxd
+ 	const property movimientoAleatorio = new Aleatorio()
+ 	
+	var movimiento = movimientoAleatorio
 
 	method position() = movimiento.posicion()
 
@@ -84,7 +134,7 @@ object pepita {
 
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
-		game.schedule(4800, { movimiento = aleatorioxd})
+		game.schedule(4800, { movimiento = movimientoAleatorio})
 		//game.removeVisual(self)
  		vida.pierdeVida()
  		if (vida.cantidadDeVida() == 0){

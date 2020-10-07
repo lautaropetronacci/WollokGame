@@ -22,6 +22,8 @@ object dontwhackthecapybara {
 	method agregarPersonajes() {
 		game.addVisual(carpincho)
 		game.addVisual(topo)
+		game.addVisual(topo2)
+		game.addVisual(topo3)
 		game.addVisual(martillo)
 	}
 
@@ -34,8 +36,10 @@ object dontwhackthecapybara {
 	}
 
 	method configurarAcciones() {
-		game.onTick(4350, "mover aleatoriamente", { aleatorio.nuevaPosicion()})
-		game.onTick(4800, "mover aleatoriamente carpincho", { aleatorioxd.nuevaPosicion()})
+		game.onTick(4350, "mover aleatoriamente", { topo.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4150, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4640, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
 	}
 
 }
