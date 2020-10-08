@@ -3,4 +3,4 @@ import Dontwhackthecapybara.*
 
 program game {
 	dontwhackthecapybara.iniciar()
-}
+} 

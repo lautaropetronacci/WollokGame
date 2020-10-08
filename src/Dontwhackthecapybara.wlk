@@ -4,6 +4,11 @@ import movimientos.*
 
 object dontwhackthecapybara {
 
+	const topo1 = new Topo()
+	const topo2 = new Topo()
+	const topo3 = new Topo()
+	
+	
 	method iniciar() {
 		self.configurarJuego()
 		self.agregarPersonajes()
@@ -21,7 +26,7 @@ object dontwhackthecapybara {
 
 	method agregarPersonajes() {
 		game.addVisual(carpincho)
-		game.addVisual(topo)
+		game.addVisual(topo1)
 		game.addVisual(topo2)
 		game.addVisual(topo3)
 		game.addVisual(martillo)
@@ -32,12 +37,14 @@ object dontwhackthecapybara {
 		keyboard.down().onPressDo({ martillo.moverseA(martillo.position().down(1))})
 		keyboard.left().onPressDo({ martillo.moverseA(martillo.position().left(1))})
 		keyboard.right().onPressDo({ martillo.moverseA(martillo.position().right(1))})
-		keyboard.space().onPressDo({ martillo.golpe() })
+		keyboard.space().onPressDo({ 
+			martillo.golpe()
+		})
 	}
 
 	method configurarAcciones() {
-		game.onTick(4350, "mover aleatoriamente", { topo.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4500, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4150, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4640, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
 	}

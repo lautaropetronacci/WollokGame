@@ -1,72 +1,60 @@
 import wollok.game.*
 import movimientos.*
-/*
-object pepita {
 
-	method position() {
-		return game.center()
+object puntuacion {
+
+	method topoAplastado() {
 	}
 
-	method image() {
-		return "pepita.png"
+}
+
+object vida {
+
+	var cantidadDeVida = 3
+
+	method cantidadDeVida() = cantidadDeVida
+
+	method pierdeVida() {
+		cantidadDeVida -= 1
 	}
 
-}*/
+}
 
- object puntuacion {
- 	method topoAplastado(){
- 		
- 	}
- }
- 
- object vida {
- 	var cantidadDeVida = 3
- 	
- 	method cantidadDeVida() = cantidadDeVida
- 	
- 	method pierdeVida() {
- 		cantidadDeVida -= 1	
- 	}
- }
- 
- object martillo {
- 	
- 	var position = game.at(2, 2)
+object pantalla {
+
+	method enPantalla(posicion) = posicion.x().between(0, game.width() - 1) && posicion.y().between(0, game.height() - 1)
+
+}
+
+object martillo {
+
+	var position = game.at(2, 2)
 	var imagen = "martillo.png"
 
 	method position() = position
 
 	method moverseA(nuevaPosicion) {
-		position = nuevaPosicion
+		if (pantalla.enPantalla(nuevaPosicion)) {
+			position = nuevaPosicion
+		}
 	}
 
 	method image() = imagen
- 	
- 	method golpe() {
- 		imagen = "martilloGolpeando.png"
- 		game.schedule(500, { imagen = "martillo.png"})
- 		//game.onCollideDo(self, { chocaCon => chocaCon.aplastadoPorMartillo()})
- 		
- 		if (carpincho.position() == self.position()) {
- 			carpincho.aplastadoPorMartillo()
- 		}
- 		else if (topo.position() == self.position()){
- 			topo.aplastadoPorMartillo()
- 		}
- 		else if (topo2.position() == self.position()){
- 			topo2.aplastadoPorMartillo()
- 		}
- 		else if (topo3.position() == self.position()){
- 			topo3.aplastadoPorMartillo()
- 		}
- 	}
- }
- 
- object topo { 	 	
- 	const imagen = "topo.png"
 
+	method golpe() {
+		imagen = "martilloGolpeando.png"
+		game.schedule(500, { imagen = "martillo.png"})
+		if (not game.colliders(self).isEmpty()){
+			game.colliders(self).first().aplastadoPorMartillo()
+		}
+	}
+
+}
+
+object topo {
+
+	const imagen = "topo.png"
 	const property movimientoAleatorio = new Aleatorio()
-
 	var movimiento = movimientoAleatorio
 
 	method position() = movimiento.posicion()
@@ -74,58 +62,16 @@ object pepita {
 	method image() = imagen
 
 	method aplastadoPorMartillo() {
-		//game.removeVisual(self)
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
- 		puntuacion.topoAplastado()
- 		//game.schedule(2000, { game.addVisual(self)})
+		puntuacion.topoAplastado()
 	}
- }
- 
-  object topo2 { 	 	
- 	const imagen = "topo.png"
+
+}
+
+object carpincho {
 
 	const property movimientoAleatorio = new Aleatorio()
-
-	var movimiento = movimientoAleatorio
-
-	method position() = movimiento.posicion()
-
-	method image() = imagen
-
-	method aplastadoPorMartillo() {
-		//game.removeVisual(self)
-		movimiento = posicionFueraDeMapa
-		game.schedule(3800, { movimiento = movimientoAleatorio})
- 		puntuacion.topoAplastado()
- 		//game.schedule(2000, { game.addVisual(self)})
-	}
- }
- 
-  object topo3 { 	 	
- 	const imagen = "topo.png"
-
-	const property movimientoAleatorio = new Aleatorio()
-
-	var movimiento = movimientoAleatorio
-
-	method position() = movimiento.posicion()
-
-	method image() = imagen
-
-	method aplastadoPorMartillo() {
-		//game.removeVisual(self)
-		movimiento = posicionFueraDeMapa
-		game.schedule(3800, { movimiento = movimientoAleatorio})
- 		puntuacion.topoAplastado()
- 		//game.schedule(2000, { game.addVisual(self)})
-	}
- }
-
- object carpincho {
- 	
- 	const property movimientoAleatorio = new Aleatorio()
- 	
 	var movimiento = movimientoAleatorio
 
 	method position() = movimiento.posicion()
@@ -133,14 +79,35 @@ object pepita {
 	method image() = "carpincho.png"
 
 	method aplastadoPorMartillo() {
-		movimiento = posicionFueraDeMapa
 		game.schedule(4800, { movimiento = movimientoAleatorio})
-		//game.removeVisual(self)
- 		vida.pierdeVida()
- 		if (vida.cantidadDeVida() == 0){
- 			game.say(self, "esto te pasa por tocar al carpincho")
- 			game.schedule(5000, { game.stop()})
- 		}
- 		//game.schedule(8000, { game.addVisual(self)})
+			// game.removeVisual(self)
+		vida.pierdeVida()
+		if (vida.cantidadDeVida() == 0) {
+			game.say(self, "sabes que esto significa... la guerra")
+			game.schedule(5000, { game.stop()})
+		} else {
+			movimiento = posicionFueraDeMapa
+		}
+	// game.schedule(8000, { game.addVisual(self)})
 	}
- }
+
+}
+
+class Topo {
+
+	const imagen = "topo.png"
+	const property movimientoAleatorio = new Aleatorio()
+	var movimiento = movimientoAleatorio
+
+	method position() = movimiento.posicion()
+
+	method image() = imagen
+
+	method aplastadoPorMartillo() {
+		movimiento = posicionFueraDeMapa
+		game.schedule(3800, { movimiento = movimientoAleatorio})
+		puntuacion.topoAplastado()
+	}
+
+}
+
