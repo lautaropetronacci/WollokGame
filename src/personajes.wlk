@@ -119,7 +119,10 @@ object tablero{
 	const imagen = "score board.png"
 	
 	method position() = game.at(2,4)
+	
 	method image() = imagen
+	
+	method aplastadoPorMartillo(){}
 }
 
 
@@ -127,7 +130,7 @@ object fondo{
 	
 	method position() = game.at(1,1)
 	
-	method image() = "Fondo.png"
+	method image() = "martillo.png"
 	
 	method aplastadoPorMartillo(){}
 }

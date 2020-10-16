@@ -8,7 +8,4 @@ test "al golpear un topo sube la puntuacion" {
 	assert.equals(50, puntuacion.puntos())
 }
 
-test "al golpear con el martillo cambia "{
-	
-}
 
