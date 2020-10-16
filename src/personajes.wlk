@@ -124,6 +124,10 @@ object tablero{
 
 
 object fondo{
+	
 	method position() = game.at(1,1)
-	method image() = "fondo2.png"
+	
+	method image() = "Fondo.png"
+	
+	method aplastadoPorMartillo(){}
 }

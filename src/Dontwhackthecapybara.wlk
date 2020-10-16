@@ -25,12 +25,14 @@ object dontwhackthecapybara {
 	}
 
 	method agregarPersonajes() {
+		game.addVisual(fondo)
 		game.addVisual(carpincho)
 		game.addVisual(topo1)
 		game.addVisual(topo2)
 		game.addVisual(topo3)
 		game.addVisual(martillo)
 		game.addVisual(tablero)
+		
 	}
 
 	method configurarTeclas() {

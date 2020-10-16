@@ -3,7 +3,12 @@ import personajes.*
 import movimientos.*
 import wollok.game.*
 
-test "al golpear un topo sube el score" {
+test "al golpear un topo sube la puntuacion" {
 	topo.aplastadoPorMartillo()
 	assert.equals(50, puntuacion.puntos())
 }
+
+test "al golpear con el martillo cambia "{
+	
+}
+
