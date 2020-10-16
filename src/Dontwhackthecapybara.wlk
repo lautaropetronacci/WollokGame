@@ -19,7 +19,7 @@ object dontwhackthecapybara {
 
 	method configurarJuego() {
 		game.title("Don't whack the capybara")
-		game.width(6)
+		game.width(5)
 		game.height(5)
 		game.cellSize(200)
 	}
@@ -30,6 +30,7 @@ object dontwhackthecapybara {
 		game.addVisual(topo2)
 		game.addVisual(topo3)
 		game.addVisual(martillo)
+		game.addVisual(tablero)
 	}
 
 	method configurarTeclas() {
