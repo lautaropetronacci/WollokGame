@@ -1,4 +1,4 @@
-import wollok.game.*
+ import wollok.game.*
 import Dontwhackthecapybara.*
 
 program game {

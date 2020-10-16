@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: TPILos4Fantasticos
 Bundle-ManifestVersion: 2
-Bundle-Name: empty
+Bundle-Name: TPILos4Fantasticos
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: empty; singleton:=true
+Bundle-SymbolicName: TPILos4Fantasticos; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.ibm.icu,
  org.eclipse.xtext,
@@ -11,8 +12,6 @@ Require-Bundle: com.ibm.icu,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xpand,
- de.itemis.xtext.antlr;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.uqbar.project.wollok,
  org.uqbar.project.wollok.launch,
  org.uqbar.project.wollok.lib,
