@@ -114,6 +114,6 @@ class Topo {
 object tablero{
 	const imagen = "score board.png"
 	
-	method position() = game.at(4,4)
+	method position() = game.at(2,4)
 	method image() = imagen
 }
