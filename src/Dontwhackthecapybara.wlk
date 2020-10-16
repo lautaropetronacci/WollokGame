@@ -22,10 +22,11 @@ object dontwhackthecapybara {
 		game.width(5)
 		game.height(5)
 		game.cellSize(200)
+		game.boardGround("fondo.png")
 	}
 
 	method agregarPersonajes() {
-		game.addVisual(fondo)
+		/*game.addVisual(fondo)*/
 		game.addVisual(carpincho)
 		game.addVisual(topo1)
 		game.addVisual(topo2)

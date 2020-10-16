@@ -1,16 +1,48 @@
 import wollok.game.*
 import movimientos.*
 
-object puntuacion {
-	var puntos = 0
-	
-	method puntos() = puntos 
-	
-	method topoAplastado() {
-		puntos += 50
-	}
 
+object puntos{
+    var puntos= 0
+    var property imagenCentena
+    var property imagenDecena
+    var property imagenUnidad
+
+    var property unidad
+    var property decena
+    var property centena
+    var property mil
+
+	method puntos() = puntos
+	
+    method topoAplastado(){
+        puntos +=50 
+        self.dividirNumeros(puntos)
+        imagenUnidad = "imagen" + self.unidad().toString() +".png"
+        imagenDecena = "imagen" + self.decena().toString() +".png"
+        imagenCentena ="imagen" + self.centena().toString() +".png"
+    }
+
+    method dividirNumeros(numero){
+        if (numero.digits()==2){
+            decena = numero / 10
+            unidad = numero - (decena * 10)
+        }
+        else if (numero.digits()==3){
+            centena = numero / 100
+            decena = (numero - (centena*100))/10
+            unidad = numero - (centena*100 + decena*10)
+        }
+        else if(numero.digits()==4){
+            mil = numero / 1000
+            centena = (numero - (mil * 1000) )/ 100
+            decena = (numero - (mil * 1000 + centena*100))/10
+            unidad = numero - (mil * 1000 + centena*100 + decena*10)
+        }
+    }
+    
 }
+  
 
 object vida {
 
@@ -68,7 +100,7 @@ object topo {
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
-		puntuacion.topoAplastado()
+		puntos.topoAplastado()
 	}
 
 }
@@ -110,7 +142,7 @@ class Topo {
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
-		puntuacion.topoAplastado()
+		puntos.topoAplastado()
 	}
 
 }
@@ -125,12 +157,12 @@ object tablero{
 	method aplastadoPorMartillo(){}
 }
 
-
-object fondo{
+/*
+ object fondo{
 	
 	method position() = game.at(1,1)
 	
-	method image() = "martillo.png"
+	method image() = "fondo.png"
 	
 	method aplastadoPorMartillo(){}
-}
+}*/
