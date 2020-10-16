@@ -2,8 +2,12 @@ import wollok.game.*
 import movimientos.*
 
 object puntuacion {
-
+	var puntos = 0
+	
+	method puntuacion() = puntos 
+	
 	method topoAplastado() {
+		puntos += 50
 	}
 
 }
