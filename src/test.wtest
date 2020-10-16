@@ -5,5 +5,5 @@ import wollok.game.*
 
 test "al golpear un topo sube el score" {
 	topo.aplastadoPorMartillo()
-	assert.equals(50,puntuacion.puntos())
+	assert.equals(50, puntuacion.puntos())
 }

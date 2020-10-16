@@ -4,7 +4,7 @@ import movimientos.*
 object puntuacion {
 	var puntos = 0
 	
-	method puntuacion() = puntos 
+	method puntos() = puntos 
 	
 	method topoAplastado() {
 		puntos += 50
@@ -120,4 +120,10 @@ object tablero{
 	
 	method position() = game.at(2,4)
 	method image() = imagen
+}
+
+
+object fondo{
+	method position() = game.at(1,1)
+	method image() = "fondo2.png"
 }
