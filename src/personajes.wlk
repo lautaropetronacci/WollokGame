@@ -4,23 +4,25 @@ import movimientos.*
 
 object puntos{
     var puntos= 0
-    var property imagenCentena
-    var property imagenDecena
-    var property imagenUnidad
+    var property imagenMil = "imagen 0.png"
+    var property imagenCentena = "imagen 0.png"
+    var property imagenDecena = "imagen 0.png"
+    var property imagenUnidad = "imagen 0.png"
 
-    var property unidad
-    var property decena
-    var property centena
-    var property mil
+    var property unidad = 0
+    var property decena = 0
+    var property centena = 0
+    var property mil = 0
 
 	method puntos() = puntos
 	
     method topoAplastado(){
         puntos +=50 
         self.dividirNumeros(puntos)
-        imagenUnidad = "imagen" + self.unidad().toString() +".png"
-        imagenDecena = "imagen" + self.decena().toString() +".png"
-        imagenCentena ="imagen" + self.centena().toString() +".png"
+        imagenUnidad = "imagen " + self.unidad().toString() +".png"
+        imagenDecena = "imagen " + self.decena().toString() +".png"
+        imagenCentena ="imagen " + self.centena().toString() +".png"
+        imagenUnidad = "imagen " + self.mil().toString() +".png"
     }
 
     method dividirNumeros(numero){
@@ -60,6 +62,22 @@ object pantalla {
 
 	method enPantalla(posicion) = posicion.x().between(0, game.width() - 1) && posicion.y().between(0, game.height() - 1)
 
+}
+
+object boton {
+
+	const position = game.at(5, 3)
+	var imagen = "boton.png"
+
+
+	method position() = position
+
+	method image() = imagen
+	
+	method aplastadoPorMartillo() {
+		imagen = "botonGolpeado.png"
+		game.schedule(550, { imagen = "boton.png"})
+	}
 }
 
 object martillo {
