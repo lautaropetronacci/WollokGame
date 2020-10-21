@@ -16,11 +16,25 @@ object puntos{
     var property decena = 0
     var property centena = 0
     var property mil = 0
-
+	
+	var property imagen = "victoria.png"
+	var property posicion = game.at(7,7)
+	
+	method position() = posicion
+	
+	method image() = imagen
+	
+	method aplastadoPorMartillo(){}
+	
 	method puntos() = puntos
 	
     method topoAplastado(){
         puntos +=50 
+        if(puntos == 100){
+        	game.schedule(0, { self.posicion(game.at(1,1)) })
+        	game.schedule(10000, { game.stop()})
+        	game.sound("snd_music_victorytheme.ogg")
+        }
         self.dividirNumeros(puntos)
         imagenUnidad = "imagenUnidad" + self.unidad().toString() +".png"
         imagenDecena = "imagenDecena" + self.decena().toString() +".png"
@@ -196,6 +210,15 @@ object tablero{
 	method aplastadoPorMartillo(){}
 }
 
+/*object victoria{
+	const imagen = "victoria.png"
+	
+	method position() = game.at(1,1)
+	
+	method image() = imagen
+	
+	method aplastadoPorMartillo(){}
+}*/
 /*
  object fondo{
 	

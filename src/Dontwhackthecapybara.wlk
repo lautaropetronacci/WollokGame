@@ -18,6 +18,7 @@ object dontwhackthecapybara {
 		self.configurarTeclas()
 		self.configurarAcciones(1)
 		game.start()
+		
 	}
 
 	method configurarJuego() {
@@ -38,6 +39,8 @@ object dontwhackthecapybara {
 		game.addVisual(topo3)
 		game.addVisual(martillo)
 		game.addVisual(tablero)
+		game.addVisual(puntos)
+		
 	}
 
 	method configurarTeclas() {
