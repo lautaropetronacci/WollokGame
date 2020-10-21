@@ -34,6 +34,10 @@ object dontwhackthecapybara {
 		game.addVisual(topo3)
 		game.addVisual(martillo)
 		game.addVisual(tablero)
+		game.addVisual(unidadTablero)
+		game.addVisual(decenaTablero)
+		game.addVisual(centenaTablero)
+		game.addVisual(milTablero)
 	}
 
 	method configurarTeclas() {
@@ -47,10 +51,10 @@ object dontwhackthecapybara {
 	}
 
 	method configurarAcciones() {
-		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4500, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4150, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4640, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(3000.randomUpTo(4000), "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4000.randomUpTo(4700), "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4000.randomUpTo(4700), "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(4000.randomUpTo(4700), "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
 	}
 
 }

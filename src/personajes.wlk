@@ -1,31 +1,63 @@
 import wollok.game.*
 import movimientos.*
 
+class NumeroPuntuacion{
+	var property position = game.at(1, 4)
+
+	var imagen = "imagen 0.png"
+
+	method CambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+
+	method position() = position
+
+	method image() = imagen
+}
+
+object unidadTablero inherits NumeroPuntuacion {
+	override method position() = game.at(2, 4)
+}
+
+object decenaTablero inherits NumeroPuntuacion {
+	override method position() = game.at(2, 4)
+}
+
+object centenaTablero inherits NumeroPuntuacion {
+	
+}
+
+object milTablero inherits NumeroPuntuacion {
+	
+}
 
 
 
 
 object puntos{
-    var puntos= 0
+    var property puntos = 0
     var property imagenMil = "imagen 0.png"
     var property imagenCentena = "imagen 0.png"
     var property imagenDecena = "imagen 0.png"
     var property imagenUnidad = "imagen 0.png"
+    
 
     var property unidad = 0
     var property decena = 0
     var property centena = 0
     var property mil = 0
-
-	method puntos() = puntos
 	
     method topoAplastado(){
         puntos +=50 
         self.dividirNumeros(puntos)
         imagenUnidad = "imagen " + self.unidad().toString() +".png"
         imagenDecena = "imagen " + self.decena().toString() +".png"
-        imagenCentena ="imagen " + self.centena().toString() +".png"
+        imagenCentena = "imagen " + self.centena().toString() +".png"
         imagenUnidad = "imagen " + self.mil().toString() +".png"
+        unidadTablero.CambiarNumero(imagenUnidad)
+        decenaTablero.CambiarNumero(imagenDecena)
+        centenaTablero.CambiarNumero(imagenCentena)
+        milTablero.CambiarNumero(imagenMil)
     }
 
     method dividirNumeros(numero){
@@ -34,14 +66,14 @@ object puntos{
             unidad = numero - (decena * 10)
         }
         else if (numero.digits()==3){
-            centena = numero / 100
-            decena = (numero - (centena*100))/10
+            centena = (numero / 100).truncate(0)
+            decena = ((numero - (centena*100))/10).truncate(0)
             unidad = numero - (centena*100 + decena*10)
         }
         else if(numero.digits()==4){
-            mil = numero / 1000
-            centena = (numero - (mil * 1000) )/ 100
-            decena = (numero - (mil * 1000 + centena*100))/10
+            mil = (numero / 1000).truncate(0)
+            centena = ((numero - (mil * 1000) )/ 100).truncate(0)
+            decena = ((numero - (mil * 1000 + centena*100))/10).truncate(0)
             unidad = numero - (mil * 1000 + centena*100 + decena*10)
         }
     }
@@ -171,7 +203,7 @@ class Topo {
 object tablero{
 	const imagen = "score board.png"
 	
-	method position() = game.at(2,4)
+	method position() = game.at(1,4)
 	
 	method image() = imagen
 	
