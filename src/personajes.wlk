@@ -1,28 +1,60 @@
 import wollok.game.*
 import movimientos.*
 
+class NumeroPuntuacion{
+	var property position = game.at(2, 4)
+
+	var imagen = "imagen 0.png"
+
+	method CambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+
+	method position() = position
+
+	method image() = imagen
+}
+
+object unidadTablero inherits NumeroPuntuacion {
+	override method position() = game.at(3, 4)
+}
+
+object decenaTablero inherits NumeroPuntuacion {
+	override method position() = game.at(3, 4)
+}
+
+object centenaTablero inherits NumeroPuntuacion {
+	
+}
+
+object milTablero inherits NumeroPuntuacion {
+	
+}
 
 object puntos{
-    var puntos= 0
+    var property puntos = 0
     var property imagenMil = "imagen 0.png"
     var property imagenCentena = "imagen 0.png"
     var property imagenDecena = "imagen 0.png"
     var property imagenUnidad = "imagen 0.png"
+    
 
     var property unidad = 0
     var property decena = 0
     var property centena = 0
     var property mil = 0
-
-	method puntos() = puntos
 	
     method topoAplastado(){
         puntos +=50 
         self.dividirNumeros(puntos)
         imagenUnidad = "imagen " + self.unidad().toString() +".png"
         imagenDecena = "imagen " + self.decena().toString() +".png"
-        imagenCentena ="imagen " + self.centena().toString() +".png"
+        imagenCentena = "imagen " + self.centena().toString() +".png"
         imagenUnidad = "imagen " + self.mil().toString() +".png"
+        unidadTablero.CambiarNumero(imagenUnidad)
+        decenaTablero.CambiarNumero(imagenDecena)
+        centenaTablero.CambiarNumero(imagenCentena)
+        milTablero.CambiarNumero(imagenMil)
     }
 
     method dividirNumeros(numero){
@@ -101,6 +133,10 @@ object martillo {
 		if (not game.colliders(self).isEmpty()){
 			game.colliders(self).first().aplastadoPorMartillo()
 		}
+		console.println(puntos.imagenUnidad())
+		console.println(puntos.imagenDecena())
+		console.println(puntos.imagenCentena())
+		console.println(puntos.imagenMil())
 	}
 
 }
@@ -168,7 +204,7 @@ class Topo {
 object tablero{
 	const imagen = "score board.png"
 	
-	method position() = game.at(2,4)
+	method position() = game.at(1,4)
 	
 	method image() = imagen
 	
