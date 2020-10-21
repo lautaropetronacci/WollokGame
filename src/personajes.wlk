@@ -2,7 +2,7 @@ import wollok.game.*
 import movimientos.*
 
 class NumeroPuntuacion{
-	var property position = game.at(2, 4)
+	var property position = game.at(1, 4)
 
 	var imagen = "imagen 0.png"
 
@@ -16,11 +16,11 @@ class NumeroPuntuacion{
 }
 
 object unidadTablero inherits NumeroPuntuacion {
-	override method position() = game.at(3, 4)
+	override method position() = game.at(2, 4)
 }
 
 object decenaTablero inherits NumeroPuntuacion {
-	override method position() = game.at(3, 4)
+	override method position() = game.at(2, 4)
 }
 
 object centenaTablero inherits NumeroPuntuacion {
@@ -63,14 +63,14 @@ object puntos{
             unidad = numero - (decena * 10)
         }
         else if (numero.digits()==3){
-            centena = numero / 100
-            decena = (numero - (centena*100))/10
+            centena = (numero / 100).truncate(0)
+            decena = ((numero - (centena*100))/10).truncate(0)
             unidad = numero - (centena*100 + decena*10)
         }
         else if(numero.digits()==4){
-            mil = numero / 1000
-            centena = (numero - (mil * 1000) )/ 100
-            decena = (numero - (mil * 1000 + centena*100))/10
+            mil = (numero / 1000).truncate(0)
+            centena = ((numero - (mil * 1000) )/ 100).truncate(0)
+            decena = ((numero - (mil * 1000 + centena*100))/10).truncate(0)
             unidad = numero - (mil * 1000 + centena*100 + decena*10)
         }
     }
@@ -133,10 +133,6 @@ object martillo {
 		if (not game.colliders(self).isEmpty()){
 			game.colliders(self).first().aplastadoPorMartillo()
 		}
-		console.println(puntos.imagenUnidad())
-		console.println(puntos.imagenDecena())
-		console.println(puntos.imagenCentena())
-		console.println(puntos.imagenMil())
 	}
 
 }
