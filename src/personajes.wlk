@@ -2,6 +2,9 @@ import wollok.game.*
 import movimientos.*
 
 
+
+
+
 object puntos{
     var puntos= 0
     var property imagenMil = "imagen 0.png"
@@ -175,12 +178,3 @@ object tablero{
 	method aplastadoPorMartillo(){}
 }
 
-/*
- object fondo{
-	
-	method position() = game.at(1,1)
-	
-	method image() = "fondo.png"
-	
-	method aplastadoPorMartillo(){}
-}*/
