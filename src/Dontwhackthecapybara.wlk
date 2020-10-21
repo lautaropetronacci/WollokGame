@@ -9,7 +9,7 @@ object dontwhackthecapybara {
 	const topo3 = new Topo()
 	
 	const boton1 = new Boton()
-	const boton2 = new Boton2(position = game.at(5, 1))
+	const boton2 = new Boton2(position = game.at(5, 1)	)
 	
 	
 	method iniciar() {
