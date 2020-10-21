@@ -8,12 +8,15 @@ object dontwhackthecapybara {
 	const topo2 = new Topo()
 	const topo3 = new Topo()
 	
+	const boton1 = new Boton()
+	const boton2 = new Boton2(position = game.at(5, 1))
+	
 	
 	method iniciar() {
 		self.configurarJuego()
 		self.agregarPersonajes()
 		self.configurarTeclas()
-		self.configurarAcciones()
+		self.configurarAcciones(1)
 		game.start()
 	}
 
@@ -27,7 +30,8 @@ object dontwhackthecapybara {
 
 	method agregarPersonajes() {
 		/*game.addVisual(fondo)*/
-		game.addVisual(boton)
+		game.addVisual(boton1)
+		game.addVisual(boton2)
 		game.addVisual(carpincho)
 		game.addVisual(topo1)
 		game.addVisual(topo2)
@@ -46,11 +50,25 @@ object dontwhackthecapybara {
 		})
 	}
 
-	method configurarAcciones() {
+	method configurarAcciones(dificultad) {
+		if (dificultad === 1){
 		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4500, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4150, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4640, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+		} else if (dificultad === 2){
+		game.onTick(2000, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(2000, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(2000, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(2000, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+		}
+		else {
+		game.onTick(100, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(100, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(100, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
+		game.onTick(100, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+		}
+		
 	}
 
 }

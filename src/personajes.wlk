@@ -1,13 +1,16 @@
 import wollok.game.*
 import movimientos.*
-
+import Dontwhackthecapybara.*
 
 object puntos{
     var puntos= 0
-    var property imagenMil = "imagen 0.png"
-    var property imagenCentena = "imagen 0.png"
-    var property imagenDecena = "imagen 0.png"
-    var property imagenUnidad = "imagen 0.png"
+    var property imagenUnidad = "imagenUnidad0.png"
+    var property imagenDecena = "imagenDecena0.png"
+    var property imagenCentena = "imagenCentena0.png"
+    var property imagenMil = "imagenMil0.png"
+    
+   
+  
 
     var property unidad = 0
     var property decena = 0
@@ -19,10 +22,10 @@ object puntos{
     method topoAplastado(){
         puntos +=50 
         self.dividirNumeros(puntos)
-        imagenUnidad = "imagen " + self.unidad().toString() +".png"
-        imagenDecena = "imagen " + self.decena().toString() +".png"
-        imagenCentena ="imagen " + self.centena().toString() +".png"
-        imagenUnidad = "imagen " + self.mil().toString() +".png"
+        imagenUnidad = "imagenUnidad" + self.unidad().toString() +".png"
+        imagenDecena = "imagenDecena" + self.decena().toString() +".png"
+        imagenCentena ="imagenCentena" + self.centena().toString() +".png"
+        imagenMil = "imagenMil" + self.mil().toString() +".png"
     }
 
     method dividirNumeros(numero){
@@ -64,7 +67,8 @@ object pantalla {
 
 }
 
-object boton {
+class Boton {
+	var property dificultad = 1
 
 	const position = game.at(5, 3)
 	var imagen = "boton.png"
@@ -77,8 +81,25 @@ object boton {
 	method aplastadoPorMartillo() {
 		imagen = "botonGolpeado.png"
 		game.schedule(550, { imagen = "boton.png"})
+		self.modificarDificultad()
+		dontwhackthecapybara.configurarAcciones(dificultad);
+	}
+	
+	method modificarDificultad(){
+		if (dificultad < 3) dificultad ++
 	}
 }
+
+class Boton2 inherits Boton {
+	
+	override method modificarDificultad(){
+		if (dificultad > 1) dificultad --
+	}
+	
+	
+}
+
+
 
 object martillo {
 
