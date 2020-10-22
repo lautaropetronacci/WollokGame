@@ -10,27 +10,14 @@ describe "Juego"{
 	const boton1 = new Boton()
 	const boton2 = new Boton2(position = game.at(5, 1)	)
 	
-    test "al golpear un topo 1 vez, sube la puntuacion" {
-        topo.aplastadoPorMartillo()
-        assert.equals(50, puntos.puntos())
-    }
 
     test "al golpear un topo 3 veces, sube la puntuacion" {
-        //3.times(topo.aplastadoPorMartillo())
-        topo.aplastadoPorMartillo()
-        topo.aplastadoPorMartillo()
-        topo.aplastadoPorMartillo()
+        3.times({ n => topo.aplastadoPorMartillo()})
         assert.equals(150, puntos.puntos())
     }
 
-
-    test "al golpear un topo 20 vez, sube la puntuacion" {
-        20.times({ n => topo.aplastadoPorMartillo()})
-        assert.equals(1000, puntos.puntos())
-    }
-
     test "al golpear un carpincho una vez pierde una vida" {
-        carpincho.aplastadoPorMartillo()
+        dontwhackthecapybara.carpincho().aplastadoPorMartillo()
         assert.equals(2, vida.cantidadDeVida())
     }
 

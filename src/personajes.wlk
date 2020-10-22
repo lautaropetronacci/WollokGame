@@ -165,7 +165,6 @@ class Boton2 inherits Boton {
 }
 
 
-
 object martillo {
 
 	var position = game.at(2, 2)
@@ -192,17 +191,34 @@ object martillo {
 }
 
 
-object carpincho {
 
+
+
+
+class Animal {
+	const imagen = null
+	const property movimientoAleatorio = new Aleatorio()
+	var movimiento = movimientoAleatorio
+
+	method position() = movimiento.posicion()
+
+	method image() = imagen
+}
+
+
+
+
+class Carpincho inherits Animal{
+/*
 	const property movimientoAleatorio = new Aleatorio()
 	var movimiento = movimientoAleatorio
 
 	method position() = movimiento.posicion()
 
 	method image() = "carpincho.png"
-
+ */
 	method aplastadoPorMartillo() {
-		game.schedule(4800, { movimiento = movimientoAleatorio})
+		game.schedule(4000, { movimiento = movimientoAleatorio})
 		vida.pierdeVida()
 		if (vida.cantidadDeVida() == 0) {
 			resultado.perdiste()
@@ -213,8 +229,8 @@ object carpincho {
 
 }
 
-class Topo {
-
+class Topo inherits Animal{
+/*
 	const imagen = "topo.png"
 	const property movimientoAleatorio = new Aleatorio()
 	var movimiento = movimientoAleatorio
@@ -222,7 +238,7 @@ class Topo {
 	method position() = movimiento.posicion()
 
 	method image() = imagen
-
+*/
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
@@ -246,7 +262,7 @@ object resultado{
 	var property posicion = game.at(7,7)
 	
 	method perdiste() {
-		game.say(carpincho, "sabes que esto significa... la guerra")
+		game.say(dontwhackthecapybara.carpincho(), "sabes que esto significa... la guerra")
 		imagen = "derrota"
 		game.schedule(0, { self.posicion(game.at(0,0)) })
         game.schedule(10000, { game.stop()})

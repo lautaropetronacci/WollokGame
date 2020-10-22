@@ -4,9 +4,11 @@ import movimientos.*
 
 object dontwhackthecapybara {
 
-	const topo1 = new Topo()
-	const topo2 = new Topo()
-	const topo3 = new Topo()
+	const property topo1 = new Topo(imagen = "topo.png")
+	const property topo2 = new Topo(imagen = "topo.png")
+	const property topo3 = new Topo(imagen = "topo.png")
+	
+	const property carpincho = new Carpincho(imagen = "carpincho.png")
 	
 	const boton1 = new Boton()
 	const boton2 = new Boton2(position = game.at(5, 1)	)
