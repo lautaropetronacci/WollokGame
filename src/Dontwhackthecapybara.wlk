@@ -4,14 +4,12 @@ import movimientos.*
 
 object dontwhackthecapybara {
 
-	const property topo1 = new Topo(imagen = "topo.png")
-	const property topo2 = new Topo(imagen = "topo.png")
-	const property topo3 = new Topo(imagen = "topo.png")
-	
+
+	const property topos = #{new Topo(imagen = "topo.png"),new Topo(imagen = "topo.png"),new Topo(imagen = "topo.png") }
 	const property carpincho = new Carpincho(imagen = "carpincho.png")
 	
-	const boton1 = new Boton()
-	const boton2 = new Boton2(position = game.at(5, 1)	)
+	const botonSubirDificultad = new BotonSubirDificultad()
+	const botonBajarDificultad= new BotonBajarDificultad(position = game.at(5, 1)	)
 	
 	
 	method iniciar() {
@@ -19,6 +17,7 @@ object dontwhackthecapybara {
 		self.agregarPersonajes()
 		self.configurarTeclas()
 		self.configurarAcciones(1)
+		self.activarAnimales()
 		game.start()
 		
 	}
@@ -32,13 +31,10 @@ object dontwhackthecapybara {
 	}
 
 	method agregarPersonajes() {
-		/*game.addVisual(fondo)*/
-		game.addVisual(boton1)
-		game.addVisual(boton2)
+		game.addVisual(botonSubirDificultad)
+		game.addVisual(botonBajarDificultad)
 		game.addVisual(carpincho)
-		game.addVisual(topo1)
-		game.addVisual(topo2)
-		game.addVisual(topo3)
+		topos.forEach({topo => game.addVisual(topo)})
 		game.addVisual(tablero)
 		game.addVisual(vida)
 		game.addVisual(unidadTablero)
@@ -61,44 +57,33 @@ object dontwhackthecapybara {
 
 	method configurarAcciones(dificultad) {
 		if (dificultad === 1){
-		self.agregarOnTick(3600, 4500, 4150,4640)
+		//self.agregarOnTick(3600, 4500, 4150,4640)
 		} else if (dificultad === 2){
-		self.agregarOnTick(2000, 2100, 2150, 2200)
+		//self.agregarOnTick(2000, 2100, 2150, 2200)
 		}
 		else {
-		self.agregarOnTick(100, 100, 100,100)
+		//self.agregarOnTick(100, 100, 100,100)
 		}
-		
 	}
+		
+	method activarAnimales(){
+		topos.forEach({topo => topo.agregarOnTick()})
+		carpincho.agregarOnTick()
+	}		
+
+	
+	
 
 /* lista de topos en donde se le envie a cada topo sobre cambiar su velocidad */
 
-/*	method configurarAcciones(dificultad) {
-		if (dificultad === 1){
-		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4500, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4150, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(4640, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
-		} else if (dificultad === 2){
-		game.onTick(2000, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(2000, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(2000, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(2000, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
-		}
-		else {
-		game.onTick(100, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(100, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(100, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
-		game.onTick(100, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
-		}
-		
-	}
-*/
 
-	method agregarOnTick(miliSegCarpincho, miliSegTopo1, miliSegTopo2,miliSegTopo3){
+    /*method agregarOnTick(miliSegCarpincho, miliSegTopo1, miliSegTopo2,miliSegTopo3){
         game.onTick(miliSegCarpincho, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
         game.onTick(miliSegTopo1, "mover aleatoriamente topo1", { topo1.movimientoAleatorio().nuevaPosicion()})
         game.onTick(miliSegTopo2, "mover aleatoriamente topo2", { topo2.movimientoAleatorio().nuevaPosicion()})
         game.onTick(miliSegTopo3, "mover aleatoriamente topo3", { topo3.movimientoAleatorio().nuevaPosicion()})
-}
+}*/
+
+	
+
 }

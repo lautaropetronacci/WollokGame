@@ -7,8 +7,8 @@ import wollok.game.*
 describe "Juego"{
 	
 	const topo = new Topo()
-	const boton1 = new Boton()
-	const boton2 = new Boton2(position = game.at(5, 1)	)
+	const boton1 = new BotonSubirDificultad()
+	const boton2 = new BotonBajarDificultad(position = game.at(5, 1)	)
 	
 
     test "al golpear un topo 3 veces, sube la puntuacion" {

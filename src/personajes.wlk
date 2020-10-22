@@ -132,7 +132,7 @@ object pantalla {
 
 }
 
-class Boton {
+class BotonSubirDificultad {
 	var property dificultad = 1
 
 	const position = game.at(5, 3)
@@ -155,7 +155,7 @@ class Boton {
 	}
 }
 
-class Boton2 inherits Boton {
+class BotonBajarDificultad inherits BotonSubirDificultad {
 	
 	override method modificarDificultad(){
 		if (dificultad > 1) dificultad --
@@ -199,24 +199,21 @@ class Animal {
 	const imagen = null
 	const property movimientoAleatorio = new Aleatorio()
 	var movimiento = movimientoAleatorio
+	var milisegundos = 3600
 
 	method position() = movimiento.posicion()
 
 	method image() = imagen
+	
+	method agregarOnTick(){
+		game.onTick(milisegundos, "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+	}
+
 }
 
 
-
-
 class Carpincho inherits Animal{
-/*
-	const property movimientoAleatorio = new Aleatorio()
-	var movimiento = movimientoAleatorio
 
-	method position() = movimiento.posicion()
-
-	method image() = "carpincho.png"
- */
 	method aplastadoPorMartillo() {
 		game.schedule(4000, { movimiento = movimientoAleatorio})
 		vida.pierdeVida()
@@ -230,15 +227,7 @@ class Carpincho inherits Animal{
 }
 
 class Topo inherits Animal{
-/*
-	const imagen = "topo.png"
-	const property movimientoAleatorio = new Aleatorio()
-	var movimiento = movimientoAleatorio
 
-	method position() = movimiento.posicion()
-
-	method image() = imagen
-*/
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
@@ -262,8 +251,8 @@ object resultado{
 	var property posicion = game.at(7,7)
 	
 	method perdiste() {
-		game.say(dontwhackthecapybara.carpincho(), "sabes que esto significa... la guerra")
-		imagen = "derrota"
+		//game.say(dontwhackthecapybara.carpincho(), "sabes que esto significa... la guerra")
+		imagen = "game over.png"
 		game.schedule(0, { self.posicion(game.at(0,0)) })
         game.schedule(10000, { game.stop()})
 	}

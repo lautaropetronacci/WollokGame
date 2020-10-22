@@ -22,3 +22,5 @@ object posicionFueraDeMapa {
     method posicion() = posicion
 }
 
+
+
