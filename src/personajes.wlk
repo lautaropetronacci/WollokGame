@@ -4,6 +4,7 @@ import Dontwhackthecapybara.*
 
 object puntos{
     var puntos= 0
+    const puntosParaGanar = 2000
     var property imagenUnidad = "imagenUnidad0.png"
     var property imagenDecena = "imagenDecena0.png"
     var property imagenCentena = "imagenCentena0.png"
@@ -19,9 +20,9 @@ object puntos{
 	
 	method puntos() = puntos
 	
-    method topoAplastado(){
-        puntos +=50 
-        if(puntos == 3000){
+    method topoAplastado(puntosASumar){
+        puntos += puntosASumar
+        if(puntos == puntosParaGanar){
         	resultado.ganaste()
         }
         self.dividirNumeros(puntos)
@@ -225,7 +226,7 @@ class Topo {
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
 		game.schedule(3800, { movimiento = movimientoAleatorio})
-		puntos.topoAplastado()
+		puntos.topoAplastado(50)
 	}
 	
 }

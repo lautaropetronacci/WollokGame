@@ -57,11 +57,11 @@ object dontwhackthecapybara {
 		})
 	}
 
-method configurarAcciones(dificultad) {
+	method configurarAcciones(dificultad) {
 		if (dificultad === 1){
 		self.agregarOnTick(3600, 4500, 4150,4640)
 		} else if (dificultad === 2){
-		self.agregarOnTick(2000, 2000, 2000,2000)
+		self.agregarOnTick(2000, 2100, 2150, 2200)
 		}
 		else {
 		self.agregarOnTick(100, 100, 100,100)
@@ -69,6 +69,7 @@ method configurarAcciones(dificultad) {
 		
 	}
 
+/* lista de topos en donde se le envie a cada topo sobre cambiar su velocidad */
 
 /*	method configurarAcciones(dificultad) {
 		if (dificultad === 1){
@@ -94,8 +95,8 @@ method configurarAcciones(dificultad) {
 
 	method agregarOnTick(miliSegCarpincho, miliSegTopo1, miliSegTopo2,miliSegTopo3){
         game.onTick(miliSegCarpincho, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo1, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo2, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo3, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo1, "mover aleatoriamente topo1", { topo1.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo2, "mover aleatoriamente topo2", { topo2.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo3, "mover aleatoriamente topo3", { topo3.movimientoAleatorio().nuevaPosicion()})
 }
 }

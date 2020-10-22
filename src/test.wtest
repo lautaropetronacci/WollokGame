@@ -25,7 +25,7 @@ describe "Juego"{
 
 
     test "al golpear un topo 20 vez, sube la puntuacion" {
-        20.times(topo.aplastadoPorMartillo())
+        20.times({ n => topo.aplastadoPorMartillo()})
         assert.equals(1000, puntos.puntos())
     }
 
