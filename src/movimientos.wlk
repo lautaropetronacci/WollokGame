@@ -3,7 +3,7 @@ import personajes.*
 
 class Aleatorio {
 
-	var posicion = game.at(0, 0)
+	var posicion = game.at(7, 7)
 
 	method posicion() = posicion
 

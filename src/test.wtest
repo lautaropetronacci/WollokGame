@@ -3,9 +3,50 @@ import personajes.*
 import movimientos.*
 import wollok.game.*
 
-test "al golpear un topo sube la puntuacion" {
-	topo.aplastadoPorMartillo()
-	assert.equals(50, puntos.puntos())
+
+describe "Juego"{
+	
+	const topo = new Topo()
+	const boton1 = new Boton()
+	const boton2 = new Boton2(position = game.at(5, 1)	)
+	
+    test "al golpear un topo 1 vez, sube la puntuacion" {
+        topo.aplastadoPorMartillo()
+        assert.equals(50, puntos.puntos())
+    }
+
+    test "al golpear un topo 3 veces, sube la puntuacion" {
+        //3.times(topo.aplastadoPorMartillo())
+        topo.aplastadoPorMartillo()
+        topo.aplastadoPorMartillo()
+        topo.aplastadoPorMartillo()
+        assert.equals(150, puntos.puntos())
+    }
+
+
+    test "al golpear un topo 20 vez, sube la puntuacion" {
+        20.times(topo.aplastadoPorMartillo())
+        assert.equals(1000, puntos.puntos())
+    }
+
+    test "al golpear un carpincho una vez pierde una vida" {
+        carpincho.aplastadoPorMartillo()
+        assert.equals(2, vida.cantidadDeVida())
+    }
+
+    test "Al presionar el boton rojo de arriba, aumenta la 
+
+dificultad" {
+        boton1.aplastadoPorMartillo()
+        assert.equals(2, boton1.dificultad())
+    }
+
+    test "Al presionar el boton rojo de abajo, disminuye la 
+
+dificultad" {
+        boton2.dificultad(2)
+        boton2.aplastadoPorMartillo()
+        assert.equals(1, boton2.dificultad())
+    }
+
 }
-
-

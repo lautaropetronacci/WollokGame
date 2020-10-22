@@ -8,21 +8,12 @@ object puntos{
     var property imagenDecena = "imagenDecena0.png"
     var property imagenCentena = "imagenCentena0.png"
     var property imagenMil = "imagenMil0.png"
-    
-   
-  
+
 
     var property unidad = 0
     var property decena = 0
     var property centena = 0
     var property mil = 0
-	
-	var property imagen = "victoria.png"
-	var property posicion = game.at(7,7)
-	
-	method position() = posicion
-	
-	method image() = imagen
 	
 	method aplastadoPorMartillo(){}
 	
@@ -30,47 +21,106 @@ object puntos{
 	
     method topoAplastado(){
         puntos +=50 
-        if(puntos == 100){
-        	game.schedule(0, { self.posicion(game.at(1,1)) })
-        	game.schedule(10000, { game.stop()})
-        	game.sound("snd_music_victorytheme.ogg")
+        if(puntos == 3000){
+        	resultado.ganaste()
         }
         self.dividirNumeros(puntos)
         imagenUnidad = "imagenUnidad" + self.unidad().toString() +".png"
         imagenDecena = "imagenDecena" + self.decena().toString() +".png"
         imagenCentena ="imagenCentena" + self.centena().toString() +".png"
         imagenMil = "imagenMil" + self.mil().toString() +".png"
+        
+        unidadTablero.cambiarNumero(imagenUnidad)
+        decenaTablero.cambiarNumero(imagenDecena)
+        centenaTablero.cambiarNumero(imagenCentena)
+        milTablero.cambiarNumero(imagenMil)
     }
 
     method dividirNumeros(numero){
         if (numero.digits()==2){
-            decena = numero / 10
+            decena = (numero / 10).truncate(0)
             unidad = numero - (decena * 10)
         }
         else if (numero.digits()==3){
-            centena = numero / 100
-            decena = (numero - (centena*100))/10
+            centena = (numero / 100).truncate(0)
+            decena = ((numero - (centena*100))/10).truncate(0)
             unidad = numero - (centena*100 + decena*10)
         }
         else if(numero.digits()==4){
-            mil = numero / 1000
-            centena = (numero - (mil * 1000) )/ 100
-            decena = (numero - (mil * 1000 + centena*100))/10
+            mil = (numero / 1000).truncate(0)
+            centena = ((numero - (mil * 1000) )/ 100).truncate(0)
+            decena = ((numero - (mil * 1000 + centena*100))/10).truncate(0)
             unidad = numero - (mil * 1000 + centena*100 + decena*10)
         }
     }
     
 }
-  
+
+object unidadTablero {
+	var imagen = "imagenUnidad0.png"
+
+	method position() = game.at(2,4)
+
+	method cambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+	
+	method image() = imagen
+	
+}
+
+object decenaTablero {
+	var imagen = "imagenDecena0.png"
+
+	method position() = game.at(2,4)
+
+	method cambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+	
+	method image() = imagen
+}
+
+object centenaTablero {
+	var imagen = "imagenCentena0.png"
+
+	method position() = game.at(1,4)
+
+	method cambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+	
+	method image() = imagen
+}
+
+object milTablero {
+	var imagen = "imagenMil0.png"
+
+	method position() = game.at(1,4)
+
+	method cambiarNumero(nuevoNumero) {
+		imagen = nuevoNumero
+	}
+	
+	method image() = imagen
+}
+
 
 object vida {
 
+	var imagen = "3Vidas.png"
+
 	var cantidadDeVida = 3
 
+	method position() = game.at(4,4)
+
+	method image() = imagen
+	
 	method cantidadDeVida() = cantidadDeVida
 
 	method pierdeVida() {
 		cantidadDeVida -= 1
+		imagen = cantidadDeVida.toString() + "Vidas.png"
 	}
 
 }
@@ -140,23 +190,6 @@ object martillo {
 
 }
 
-object topo {
-
-	const imagen = "topo.png"
-	const property movimientoAleatorio = new Aleatorio()
-	var movimiento = movimientoAleatorio
-
-	method position() = movimiento.posicion()
-
-	method image() = imagen
-
-	method aplastadoPorMartillo() {
-		movimiento = posicionFueraDeMapa
-		game.schedule(3800, { movimiento = movimientoAleatorio})
-		puntos.topoAplastado()
-	}
-
-}
 
 object carpincho {
 
@@ -169,15 +202,12 @@ object carpincho {
 
 	method aplastadoPorMartillo() {
 		game.schedule(4800, { movimiento = movimientoAleatorio})
-			// game.removeVisual(self)
 		vida.pierdeVida()
 		if (vida.cantidadDeVida() == 0) {
-			game.say(self, "sabes que esto significa... la guerra")
-			game.schedule(5000, { game.stop()})
+			resultado.perdiste()
 		} else {
 			movimiento = posicionFueraDeMapa
 		}
-	// game.schedule(8000, { game.addVisual(self)})
 	}
 
 }
@@ -197,34 +227,39 @@ class Topo {
 		game.schedule(3800, { movimiento = movimientoAleatorio})
 		puntos.topoAplastado()
 	}
-
+	
 }
 
 object tablero{
 	const imagen = "score board.png"
 	
-	method position() = game.at(2,4)
+	method position() = game.at(1,4)
 	
 	method image() = imagen
 	
 	method aplastadoPorMartillo(){}
 }
 
-/*object victoria{
-	const imagen = "victoria.png"
+object resultado{
+	var imagen = "victoria.png"
+	var property posicion = game.at(7,7)
 	
-	method position() = game.at(1,1)
+	method perdiste() {
+		game.say(carpincho, "sabes que esto significa... la guerra")
+		imagen = "derrota"
+		game.schedule(0, { self.posicion(game.at(0,0)) })
+        game.schedule(10000, { game.stop()})
+	}
+	
+	method ganaste() {
+		game.schedule(0, { self.posicion(game.at(0,0)) })
+        game.schedule(10000, { game.stop()})
+        game.sound("snd_music_victorytheme.ogg").play()
+	}
+	
+	method position() = posicion
 	
 	method image() = imagen
 	
 	method aplastadoPorMartillo(){}
-}*/
-/*
- object fondo{
-	
-	method position() = game.at(1,1)
-	
-	method image() = "fondo.png"
-	
-	method aplastadoPorMartillo(){}
-}*/
+}

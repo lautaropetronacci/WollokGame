@@ -37,10 +37,14 @@ object dontwhackthecapybara {
 		game.addVisual(topo1)
 		game.addVisual(topo2)
 		game.addVisual(topo3)
-		game.addVisual(martillo)
 		game.addVisual(tablero)
-		game.addVisual(puntos)
-		
+		game.addVisual(vida)
+		game.addVisual(unidadTablero)
+		game.addVisual(decenaTablero)
+		game.addVisual(centenaTablero)
+		game.addVisual(milTablero)
+		game.addVisual(martillo)
+		game.addVisual(resultado)
 	}
 
 	method configurarTeclas() {
@@ -53,7 +57,20 @@ object dontwhackthecapybara {
 		})
 	}
 
-	method configurarAcciones(dificultad) {
+method configurarAcciones(dificultad) {
+		if (dificultad === 1){
+		self.agregarOnTick(3600, 4500, 4150,4640)
+		} else if (dificultad === 2){
+		self.agregarOnTick(2000, 2000, 2000,2000)
+		}
+		else {
+		self.agregarOnTick(100, 100, 100,100)
+		}
+		
+	}
+
+
+/*	method configurarAcciones(dificultad) {
 		if (dificultad === 1){
 		game.onTick(3600, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
 		game.onTick(4500, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
@@ -73,5 +90,12 @@ object dontwhackthecapybara {
 		}
 		
 	}
+*/
 
+	method agregarOnTick(miliSegCarpincho, miliSegTopo1, miliSegTopo2,miliSegTopo3){
+        game.onTick(miliSegCarpincho, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo1, "mover aleatoriamente", { topo1.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo2, "mover aleatoriamente", { topo2.movimientoAleatorio().nuevaPosicion()})
+        game.onTick(miliSegTopo3, "mover aleatoriamente", { topo3.movimientoAleatorio().nuevaPosicion()})
+}
 }
