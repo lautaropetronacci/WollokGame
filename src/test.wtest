@@ -21,19 +21,20 @@ describe "Juego"{
         assert.equals(2, vida.cantidadDeVida())
     }
 
-    test "Al presionar el boton rojo de arriba, aumenta la 
-
-dificultad" {
+    test "Al presionar el boton rojo de arriba, aumenta la dificultad" {
         boton1.aplastadoPorMartillo()
         assert.equals(2, boton1.dificultad())
     }
 
-    test "Al presionar el boton rojo de abajo, disminuye la 
-
-dificultad" {
+    test "Al presionar el boton rojo de abajo, disminuye la dificultad" {
         boton2.dificultad(2)
         boton2.aplastadoPorMartillo()
         assert.equals(1, boton2.dificultad())
     }
-
+    
+	test "Al aplastar carpincho se pierde vida" {
+        dontwhackthecapybara.carpincho().aplastadoPorMartillo()
+        assert.equals(2, vida.cantidadDeVida())
+        assert.equals("2Vidas.png", vida.image())
+    }
 }

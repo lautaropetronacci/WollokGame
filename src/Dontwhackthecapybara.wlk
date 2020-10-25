@@ -43,6 +43,7 @@ object dontwhackthecapybara {
 		game.addVisual(milTablero)
 		game.addVisual(martillo)
 		game.addVisual(resultado)
+		game.addVisual(exitGame)
 	}
 
 	method configurarTeclas() {

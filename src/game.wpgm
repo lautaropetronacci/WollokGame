@@ -6,4 +6,6 @@ program game {
 	dontwhackthecapybara.iniciar()
 } 
 
-/* añadir un contador,  que cada 1 segundo reste 1 al valor y que cada vez que se golpee un topo se le suba el valor, al llegar a 0 el valor se pierde */
+/* añadir un contador,  que cada 1 segundo reste 1 al valor y que cada vez que se golpee un topo se le suba el valor,
+ * al llegar a 0 el valor se pierde
+ */

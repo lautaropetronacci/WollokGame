@@ -111,7 +111,7 @@ object vida {
 
 	var imagen = "3Vidas.png"
 
-	var cantidadDeVida = 3
+	var property cantidadDeVida = 3
 
 	method position() = game.at(4,4)
 
@@ -127,8 +127,17 @@ object vida {
 }
 
 object pantalla {
-
-	method enPantalla(posicion) = posicion.x().between(0, game.width() - 1) && posicion.y().between(0, game.height() - 1)
+	
+	var limiteDePantallaAlto = game.height() - 1
+	var limiteDePantallaAncho = game.width() - 1
+	
+	method perder(){
+		limiteDePantallaAlto = 1
+		limiteDePantallaAncho = 0
+	}
+	
+	
+	method enPantalla(posicion) = posicion.x().between(0,  limiteDePantallaAncho) && posicion.y().between(0, limiteDePantallaAlto)
 
 }
 
@@ -163,6 +172,37 @@ class BotonBajarDificultad inherits BotonSubirDificultad {
 	
 	
 }
+
+class BotonesGameOver {
+	var position = game.at(7, 7)
+	
+	method perder(){
+		position = game.at(0,0)
+	}
+}
+
+object exitGame inherits BotonesGameOver {
+	 
+	 var imagen = "ExitGame.png"
+	 
+	 method image() = imagen
+	 
+	 method aplastadoPorMartillo(){
+	 imagen = "ExitGameAplastado.png"
+	 game.schedule(500, { imagen = "ExitGame.png"})	
+	 game.schedule(500, { game.stop()})
+	 }
+}
+
+//object playAgain inherits BotonesGameOver{
+	
+	//var imagen = "PlayAgain.png"
+	 
+	 //method image() = imagen
+	
+	//method aplastadoPorMartillo() = 
+//}
+
 
 
 object martillo {
@@ -251,8 +291,9 @@ object resultado{
 	var property posicion = game.at(7,7)
 	
 	method perdiste() {
-		//game.say(dontwhackthecapybara.carpincho(), "sabes que esto significa... la guerra")
-		imagen = "game over.png"
+		imagen = "GameOver.png"
+		pantalla.perder()
+		exitGame.perder()
 		game.schedule(0, { self.posicion(game.at(0,0)) })
         game.schedule(10000, { game.stop()})
 	}
