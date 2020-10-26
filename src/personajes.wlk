@@ -176,11 +176,9 @@ class BotonBajarDificultad inherits BotonSubirDificultad {
 class BotonesGameOver {
 	var posicion = game.at(7, 7)
 	
-	method position() = posicion
-	
-	method perder(){
-		posicion = game.at(0,0)
-	}
+	method position() = posicion      // nota de lauti a la 1am: chequear la utilidad de esta clase, osea de si sirve para algo o es mejor
+									 // hacer dos objetos y listo
+	method perder(){}
 }
 
 object exitGame inherits BotonesGameOver {
@@ -188,6 +186,11 @@ object exitGame inherits BotonesGameOver {
 	 var imagen = "ExitGame.png"
 	 
 	 method image() = imagen
+	 
+	 override method perder(){
+	 	posicion = game.at(0,0)
+	 }
+	 
 	 method aplastadoPorMartillo(){
 	 	imagen = "ExitGameAplastado.png"
 	 	game.schedule(500, { imagen = "ExitGame.png"})	
@@ -195,14 +198,23 @@ object exitGame inherits BotonesGameOver {
 	 }
 }
 
-//object playAgain inherits BotonesGameOver{
+object playAgain inherits BotonesGameOver{
 	
-	//var imagen = "PlayAgain.png"
+	var imagen = "PlayAgain.png"
 	 
-	 //method image() = imagen
+	method image() = imagen
 	
-	//method aplastadoPorMartillo() = 
-//}
+	 override method perder(){
+	 	posicion = game.at(0,1)
+	 }
+	
+	method aplastadoPorMartillo(){
+		imagen = "PlayAgainAplastado.png"
+	 	game.schedule(500, { imagen = "PlayAgain.png"})
+		game.clear()
+		dontwhackthecapybara.iniciar()
+	} 
+}
 
 
 
@@ -293,9 +305,11 @@ object resultado{
 	
 	method perdiste() {
 		imagen = "GameOver.png"
+		martillo.posicion(game.at(0,0))
 		pantalla.perder()
 		exitGame.perder()
 		game.schedule(0, { self.posicion(game.at(0,0)) })
+		
 	}
 	
 	method ganaste() {

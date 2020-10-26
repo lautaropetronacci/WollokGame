@@ -42,6 +42,7 @@ object dontwhackthecapybara {
 		game.addVisual(centenaTablero)
 		game.addVisual(milTablero)
 		game.addVisual(exitGame)
+		game.addVisual(playAgain)
 		game.addVisual(martillo)
 		game.addVisual(resultado)
 	}
