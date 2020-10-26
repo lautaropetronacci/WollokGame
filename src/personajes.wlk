@@ -174,10 +174,12 @@ class BotonBajarDificultad inherits BotonSubirDificultad {
 }
 
 class BotonesGameOver {
-	var position = game.at(7, 7)
+	var posicion = game.at(7, 7)
+	
+	method position() = posicion
 	
 	method perder(){
-		position = game.at(0,0)
+		posicion = game.at(0,0)
 	}
 }
 
@@ -186,11 +188,10 @@ object exitGame inherits BotonesGameOver {
 	 var imagen = "ExitGame.png"
 	 
 	 method image() = imagen
-	 
 	 method aplastadoPorMartillo(){
-	 imagen = "ExitGameAplastado.png"
-	 game.schedule(500, { imagen = "ExitGame.png"})	
-	 game.schedule(500, { game.stop()})
+	 	imagen = "ExitGameAplastado.png"
+	 	game.schedule(500, { imagen = "ExitGame.png"})	
+	 	game.schedule(1000, { game.stop()})
 	 }
 }
 
@@ -207,14 +208,14 @@ object exitGame inherits BotonesGameOver {
 
 object martillo {
 
-	var position = game.at(2, 2)
+	var property posicion = game.at(2, 2)
 	var imagen = "martillo.png"
 
-	method position() = position
+	method position() = posicion
 
 	method moverseA(nuevaPosicion) {
 		if (pantalla.enPantalla(nuevaPosicion)) {
-			position = nuevaPosicion
+			posicion = nuevaPosicion
 		}
 	}
 
@@ -295,7 +296,6 @@ object resultado{
 		pantalla.perder()
 		exitGame.perder()
 		game.schedule(0, { self.posicion(game.at(0,0)) })
-        game.schedule(10000, { game.stop()})
 	}
 	
 	method ganaste() {
