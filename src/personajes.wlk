@@ -111,7 +111,7 @@ object vida {
 
 	var imagen = "3Vidas.png"
 
-	var property cantidadDeVida = 3
+	var property cantidadDeVida = 1
 
 	method position() = game.at(4,4)
 
@@ -174,11 +174,9 @@ class BotonBajarDificultad inherits BotonSubirDificultad {
 }
 
 class BotonesGameOver {
-	var posicion = game.at(7, 7)
+	var property posicion = game.at(7, 7)
 	
-	method position() = posicion      // nota de lauti a la 1am: chequear la utilidad de esta clase, osea de si sirve para algo o es mejor
-									 // hacer dos objetos y listo
-	method perder(){}
+	method position() = posicion      // nota de lauti a la 1am: chequear la utilidad de esta clase, osea de si sirve para algo o es mejor								 // hacer dos objetos y listo
 }
 
 object exitGame inherits BotonesGameOver {
@@ -187,8 +185,8 @@ object exitGame inherits BotonesGameOver {
 	 
 	 method image() = imagen
 	 
-	 override method perder(){
-	 	posicion = game.at(0,0)
+	 method perder(){
+	 	self.posicion(game.at(0,0)) 
 	 }
 	 
 	 method aplastadoPorMartillo(){
@@ -204,8 +202,8 @@ object playAgain inherits BotonesGameOver{
 	 
 	method image() = imagen
 	
-	 override method perder(){
-	 	posicion = game.at(0,1)
+	method perder(){
+	 	self.posicion(game.at(0,1)) 
 	 }
 	
 	method aplastadoPorMartillo(){
@@ -305,9 +303,12 @@ object resultado{
 	
 	method perdiste() {
 		imagen = "GameOver.png"
+		game.removeVisual(dontwhackthecapybara.carpincho())
+		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
 		martillo.posicion(game.at(0,0))
 		pantalla.perder()
 		exitGame.perder()
+		playAgain.perder()
 		game.schedule(0, { self.posicion(game.at(0,0)) })
 		
 	}
@@ -318,6 +319,7 @@ object resultado{
         game.sound("snd_music_victorytheme.ogg").play()
 	}
 	
+
 	method position() = posicion
 	
 	method image() = imagen
