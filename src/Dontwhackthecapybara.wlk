@@ -71,7 +71,14 @@ object dontwhackthecapybara {
 	method activarAnimales(){
 		topos.forEach({topo => topo.agregarOnTick()})
 		carpincho.agregarOnTick()
-	}		
+	}
+	
+	method reiniciar(){
+		exitGame.moverAfuera()
+		playAgain.moverAfuera()
+		vida.cantidadDeVida(3)
+		resultado.moverAfuera()
+	}
 
 	
 	

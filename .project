@@ -31,21 +31,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>assets/game over.png</name>
-			<type>1</type>
-			<location>C:/universidad lauti/paradigmas de programacion/objetos/wollok game/game over.png</location>
-		</link>
-		<link>
-			<name>assets/snd_music_victorytheme.ogg</name>
-			<type>1</type>
-			<location>C:/universidad lauti/paradigmas de programacion/objetos/snd_music_victorytheme.ogg</location>
-		</link>
-		<link>
-			<name>assets/victoria.png</name>
-			<type>1</type>
-			<location>C:/universidad lauti/paradigmas de programacion/objetos/wollok game/victoria.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>

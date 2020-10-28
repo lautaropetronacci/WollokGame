@@ -177,6 +177,10 @@ class BotonesGameOver {
 	var property posicion = game.at(7, 7)
 	
 	method position() = posicion      // nota de lauti a la 1am: chequear la utilidad de esta clase, osea de si sirve para algo o es mejor								 // hacer dos objetos y listo
+	
+	method moverAfuera(){
+		posicion = posicionFueraDeMapa.posicion()
+	}
 }
 
 object exitGame inherits BotonesGameOver {
@@ -209,8 +213,7 @@ object playAgain inherits BotonesGameOver{
 	method aplastadoPorMartillo(){
 		imagen = "PlayAgainAplastado.png"
 	 	game.schedule(500, { imagen = "PlayAgain.png"})
-		game.clear()
-		dontwhackthecapybara.iniciar()
+		dontwhackthecapybara.reiniciar()
 	} 
 }
 
@@ -324,5 +327,8 @@ object resultado{
 	
 	method image() = imagen
 	
-	method aplastadoPorMartillo(){}
+	
+	method moverAfuera(){
+		posicion = posicionFueraDeMapa.posicion()
+	}
 }
