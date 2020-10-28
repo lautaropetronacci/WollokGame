@@ -73,7 +73,9 @@ object dontwhackthecapybara {
 		carpincho.agregarOnTick()
 	}		
 
-	
+	method reinicio(){
+		
+	}
 	
 
 /* lista de topos en donde se le envie a cada topo sobre cambiar su velocidad */
