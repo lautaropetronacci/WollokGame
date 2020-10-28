@@ -16,7 +16,6 @@ object dontwhackthecapybara {
 		self.configurarJuego()
 		self.agregarPersonajes()
 		self.configurarTeclas()
-		self.configurarAcciones(1)
 		self.activarAnimales()
 		game.start()
 		
@@ -57,16 +56,6 @@ object dontwhackthecapybara {
 		})
 	}
 
-	method configurarAcciones(dificultad) {
-		if (dificultad === 1){
-		//self.agregarOnTick(3600, 4500, 4150,4640)
-		} else if (dificultad === 2){
-		//self.agregarOnTick(2000, 2100, 2150, 2200)
-		}
-		else {
-		//self.agregarOnTick(100, 100, 100,100)
-		}
-	}
 		
 	method activarAnimales(){
 		topos.forEach({topo => topo.agregarOnTick()})
@@ -86,16 +75,5 @@ object dontwhackthecapybara {
 	}
 
 
-/* lista de topos en donde se le envie a cada topo sobre cambiar su velocidad */
-
-
-    /*method agregarOnTick(miliSegCarpincho, miliSegTopo1, miliSegTopo2,miliSegTopo3){
-        game.onTick(miliSegCarpincho, "mover aleatoriamente carpincho", { carpincho.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo1, "mover aleatoriamente topo1", { topo1.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo2, "mover aleatoriamente topo2", { topo2.movimientoAleatorio().nuevaPosicion()})
-        game.onTick(miliSegTopo3, "mover aleatoriamente topo3", { topo3.movimientoAleatorio().nuevaPosicion()})
-}*/
-
-	
 
 }

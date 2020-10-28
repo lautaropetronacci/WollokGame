@@ -159,12 +159,13 @@ object pantalla {
 
 }
 
-class BotonSubirDificultad {
-	var property dificultad = 1
+class BotonDificultad{
 
 	const position = game.at(5, 3)
+	
 	var imagen = "boton.png"
-
+	
+	const milisegundos = 1000
 
 	method position() = position
 
@@ -173,19 +174,28 @@ class BotonSubirDificultad {
 	method aplastadoPorMartillo() {
 		imagen = "botonGolpeado.png"
 		game.schedule(550, { imagen = "boton.png"})
-		self.modificarDificultad()
-		dontwhackthecapybara.configurarAcciones(dificultad);
+		self.modificarDificultad(milisegundos)
 	}
 	
-	method modificarDificultad(){
-		if (dificultad < 3) dificultad ++
-	}
+	method modificarDificultad(tiempo){}
+	
 }
 
-class BotonBajarDificultad inherits BotonSubirDificultad {
+
+class BotonSubirDificultad inherits BotonDificultad{
 	
-	override method modificarDificultad(){
-		if (dificultad > 1) dificultad --
+	
+	override method modificarDificultad(milisegundosARestar){
+    dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
+    dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
+    }
+}
+
+class BotonBajarDificultad inherits BotonDificultad{
+	
+	override method modificarDificultad(milisegundosASumar){
+	    dontwhackthecapybara.carpincho().bajarVelocidad(milisegundosASumar)
+	    dontwhackthecapybara.topos().forEach({topo => topo.bajarVelocidad(milisegundosASumar)})
 	}
 	
 	
@@ -279,6 +289,18 @@ class Animal {
 	
 	method agregarOnTick(){
 		game.onTick(milisegundos, "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+	}
+	
+	method subirVelocidad(milisegundosARestar){
+	    milisegundos = 600.max(milisegundos - milisegundosARestar)
+	    game.removeTickEvent("mover aleatoriamente") // ver si hay que cambiar nombre del onTick
+	    self.agregarOnTick()
+	}
+	
+	method bajarVelocidad(milisegundosASumar){
+	    milisegundos = 4600.min(milisegundos + milisegundosASumar)
+	    game.removeTickEvent("mover aleatoriamente")// ver si hay que cambiar nombre del onTick
+	    self.agregarOnTick()
 	}
 
 }
