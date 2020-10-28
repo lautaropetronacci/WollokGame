@@ -70,10 +70,9 @@ object dontwhackthecapybara {
 		resultado.moverAfuera()
 		puntos.reiniciar()
 		pantalla.reiniciar()
+		game.addVisual(carpincho)
 		self.topos().forEach({topo => game.addVisual(topo)})
-		game.addVisual(self.carpincho())
 		topos.forEach({topo => topo.milisegundos(3600)})
-		carpincho.milisegundos(3600)
 	}
 
 

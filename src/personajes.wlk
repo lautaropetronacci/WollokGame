@@ -241,7 +241,7 @@ object playAgain inherits BotonesGameOver{
 	method aplastadoPorMartillo(){
 		imagen = "PlayAgainAplastado.png"
 	 	game.schedule(500, { imagen = "PlayAgain.png"})
-		dontwhackthecapybara.reiniciar()
+		game.schedule(1200, { dontwhackthecapybara.reiniciar()})
 	} 
 }
 
