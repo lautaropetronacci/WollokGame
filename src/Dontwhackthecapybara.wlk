@@ -72,6 +72,8 @@ object dontwhackthecapybara {
 		pantalla.reiniciar()
 		self.topos().forEach({topo => game.addVisual(topo)})
 		game.addVisual(self.carpincho())
+		topos.forEach({topo => topo.milisegundos(3600)})
+		carpincho.milisegundos(3600)
 	}
 
 

@@ -141,16 +141,16 @@ object vida {
 
 object pantalla {
 	
-	var limiteDePantallaAlto = game.height() - 1
+	var limiteDePantallaAlto = game.height() - 2
 	var limiteDePantallaAncho = game.width() - 1
 	
 	method perder(){
 		limiteDePantallaAlto = 1
-		limiteDePantallaAncho = 0
+		limiteDePantallaAncho = 1
 	}
 	
 	method reiniciar(){
-		limiteDePantallaAlto = game.height() - 1
+		limiteDePantallaAlto = game.height() - 2
 		limiteDePantallaAncho = game.width() - 1
 	}
 	
@@ -204,7 +204,7 @@ class BotonBajarDificultad inherits BotonDificultad{
 class BotonesGameOver {
 	var property posicion = game.at(7, 7)
 	
-	method position() = posicion      // nota de lauti a la 1am: chequear la utilidad de esta clase, osea de si sirve para algo o es mejor								 // hacer dos objetos y listo
+	method position() = posicion      							
 	
 	method moverAfuera(){
 		posicion = posicionFueraDeMapa.posicion()
@@ -218,7 +218,7 @@ object exitGame inherits BotonesGameOver {
 	 method image() = imagen
 	 
 	 method perder(){
-	 	self.posicion(game.at(0,0)) 
+	 	self.posicion(game.at(1,0)) 
 	 }
 	 
 	 method aplastadoPorMartillo(){
@@ -235,7 +235,7 @@ object playAgain inherits BotonesGameOver{
 	method image() = imagen
 	
 	method perder(){
-	 	self.posicion(game.at(0,1)) 
+	 	self.posicion(game.at(1,1)) 
 	 }
 	
 	method aplastadoPorMartillo(){
@@ -269,11 +269,7 @@ object martillo {
 			game.colliders(self).first().aplastadoPorMartillo()
 		}
 	}
-
 }
-
-
-
 
 
 
@@ -281,7 +277,7 @@ class Animal {
 	const imagen = null
 	const property movimientoAleatorio = new Aleatorio()
 	var movimiento = movimientoAleatorio
-	var milisegundos = 3600
+	var property milisegundos = 3600
 
 	method position() = movimiento.posicion()
 
@@ -309,7 +305,7 @@ class Animal {
 class Carpincho inherits Animal{
 
 	method aplastadoPorMartillo() {
-		game.schedule(4000, { movimiento = movimientoAleatorio})
+		game.schedule(milisegundos, { movimiento = movimientoAleatorio})
 		vida.pierdeVida()
 		if (vida.cantidadDeVida() == 0) {
 			resultado.perdiste()
@@ -324,7 +320,7 @@ class Topo inherits Animal{
 
 	method aplastadoPorMartillo() {
 		movimiento = posicionFueraDeMapa
-		game.schedule(3800, { movimiento = movimientoAleatorio})
+		game.schedule(milisegundos, { movimiento = movimientoAleatorio})
 		puntos.topoAplastado(50)
 	}
 	
@@ -348,7 +344,7 @@ object resultado{
 		imagen = "GameOver.png"
 		game.removeVisual(dontwhackthecapybara.carpincho())
 		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
-		martillo.posicion(game.at(0,0))
+		martillo.posicion(game.at(1,1))
 		pantalla.perder()
 		exitGame.perder()
 		playAgain.perder()
