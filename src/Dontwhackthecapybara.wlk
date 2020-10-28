@@ -76,14 +76,15 @@ object dontwhackthecapybara {
 	method reiniciar(){
 		exitGame.moverAfuera()
 		playAgain.moverAfuera()
+		vida.imagen("3Vidas.png")
 		vida.cantidadDeVida(3)
 		resultado.moverAfuera()
+		puntos.reiniciar()
+		pantalla.reiniciar()
+		self.topos().forEach({topo => game.addVisual(topo)})
+		game.addVisual(self.carpincho())
 	}
 
-	method reinicio(){
-		
-	}
-	
 
 /* lista de topos en donde se le envie a cada topo sobre cambiar su velocidad */
 

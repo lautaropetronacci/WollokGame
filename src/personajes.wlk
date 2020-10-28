@@ -2,6 +2,10 @@ import wollok.game.*
 import movimientos.*
 import Dontwhackthecapybara.*
 
+class NumerosTablero{
+	method aplastadoPorMartillo(){}
+}
+
 object puntos{
     var puntos= 0
     const puntosParaGanar = 2000
@@ -55,9 +59,17 @@ object puntos{
         }
     }
     
+    method reiniciar(){
+      unidad = 0
+      decena = 0
+      centena = 0
+      mil = 0
+      self.topoAplastado( (-puntos))
+    }
+    
 }
 
-object unidadTablero {
+object unidadTablero inherits NumerosTablero{
 	var imagen = "imagenUnidad0.png"
 
 	method position() = game.at(2,4)
@@ -68,9 +80,10 @@ object unidadTablero {
 	
 	method image() = imagen
 	
+	
 }
 
-object decenaTablero {
+object decenaTablero inherits NumerosTablero{
 	var imagen = "imagenDecena0.png"
 
 	method position() = game.at(2,4)
@@ -82,7 +95,7 @@ object decenaTablero {
 	method image() = imagen
 }
 
-object centenaTablero {
+object centenaTablero inherits NumerosTablero{
 	var imagen = "imagenCentena0.png"
 
 	method position() = game.at(1,4)
@@ -94,7 +107,7 @@ object centenaTablero {
 	method image() = imagen
 }
 
-object milTablero {
+object milTablero inherits NumerosTablero{
 	var imagen = "imagenMil0.png"
 
 	method position() = game.at(1,4)
@@ -109,9 +122,9 @@ object milTablero {
 
 object vida {
 
-	var imagen = "3Vidas.png"
+	var property imagen = "3Vidas.png"
 
-	var property cantidadDeVida = 1
+	var property cantidadDeVida = 3
 
 	method position() = game.at(4,4)
 
@@ -134,6 +147,11 @@ object pantalla {
 	method perder(){
 		limiteDePantallaAlto = 1
 		limiteDePantallaAncho = 0
+	}
+	
+	method reiniciar(){
+		limiteDePantallaAlto = game.height() - 1
+		limiteDePantallaAncho = game.width() - 1
 	}
 	
 	
