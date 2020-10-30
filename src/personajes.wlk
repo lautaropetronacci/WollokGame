@@ -135,6 +135,9 @@ object vida {
 	method pierdeVida() {
 		cantidadDeVida -= 1
 		imagen = cantidadDeVida.toString() + "Vidas.png"
+		if (cantidadDeVida == 0) {
+			resultado.perdiste()
+		}
 	}
 
 }
@@ -276,7 +279,7 @@ object martillo {
 class Animal {
 	const imagen = null
 	const property movimientoAleatorio = new Aleatorio()
-	var movimiento = movimientoAleatorio
+	var property movimiento = movimientoAleatorio
 	var property milisegundos = 3600
 
 	method position() = movimiento.posicion()
@@ -299,28 +302,26 @@ class Animal {
 	    self.agregarOnTick()
 	}
 
+	method aplastadoPorMartillo() {
+		movimiento = posicionFueraDeMapa
+		game.schedule(milisegundos, { movimiento = movimientoAleatorio})
+		}
 }
 
 
 class Carpincho inherits Animal{
 
-	method aplastadoPorMartillo() {
-		game.schedule(milisegundos, { movimiento = movimientoAleatorio})
+	override method aplastadoPorMartillo() {
+		super()
 		vida.pierdeVida()
-		if (vida.cantidadDeVida() == 0) {
-			resultado.perdiste()
-		} else {
-			movimiento = posicionFueraDeMapa
-		}
 	}
 
 }
 
 class Topo inherits Animal{
 
-	method aplastadoPorMartillo() {
-		movimiento = posicionFueraDeMapa
-		game.schedule(milisegundos, { movimiento = movimientoAleatorio})
+	override method aplastadoPorMartillo() {
+		super()
 		puntos.topoAplastado(50)
 	}
 	
@@ -342,8 +343,8 @@ object resultado{
 	
 	method perdiste() {
 		imagen = "GameOver.png"
-		game.removeVisual(dontwhackthecapybara.carpincho())
-		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
+		dontwhackthecapybara.carpincho().movimiento(posicionFueraDeMapa)
+		dontwhackthecapybara.topos().forEach({topo => topo.movimiento(posicionFueraDeMapa)})
 		martillo.posicion(game.at(1,1))
 		pantalla.perder()
 		exitGame.perder()
@@ -351,19 +352,19 @@ object resultado{
 		game.schedule(0, { self.posicion(game.at(0,0)) })
 		
 	}
-	
+
 	method ganaste() {
 		game.schedule(0, { self.posicion(game.at(0,0)) })
         game.schedule(10000, { game.stop()})
         game.sound("snd_music_victorytheme.ogg").play()
 	}
-	
+
 
 	method position() = posicion
-	
+
 	method image() = imagen
-	
-	
+
+
 	method moverAfuera(){
 		posicion = posicionFueraDeMapa.posicion()
 	}
