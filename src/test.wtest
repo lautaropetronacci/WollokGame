@@ -2,6 +2,7 @@ import Dontwhackthecapybara.*
 import personajes.*
 import movimientos.*
 import wollok.game.*
+import interfaz.*
 
 
 describe "Juego"{

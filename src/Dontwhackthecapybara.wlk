@@ -1,7 +1,7 @@
 import wollok.game.*
 import personajes.*
 import movimientos.*
-
+import interfaz.*
 object dontwhackthecapybara {
 
 
@@ -44,6 +44,7 @@ object dontwhackthecapybara {
 		game.addVisual(playAgain)
 		game.addVisual(martillo)
 		game.addVisual(resultado)
+		game.addVisual(nivelDeDificultad)
 	}
 
 	method configurarTeclas() {

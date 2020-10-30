@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import interfaz.*
 
 class Aleatorio {
 

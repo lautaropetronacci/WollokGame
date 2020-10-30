@@ -1,146 +1,9 @@
 import wollok.game.*
 import movimientos.*
 import Dontwhackthecapybara.*
-
-class NumerosTablero{
-	method aplastadoPorMartillo(){}
-}
-
-object puntos{
-    var puntos= 0
-    const puntosParaGanar = 2000
-    var property imagenUnidad = "imagenUnidad0.png"
-    var property imagenDecena = "imagenDecena0.png"
-    var property imagenCentena = "imagenCentena0.png"
-    var property imagenMil = "imagenMil0.png"
+import interfaz.*
 
 
-    var property unidad = 0
-    var property decena = 0
-    var property centena = 0
-    var property mil = 0
-	
-	method aplastadoPorMartillo(){}
-	
-	method puntos() = puntos
-	
-    method topoAplastado(puntosASumar){
-        puntos += puntosASumar
-        if(puntos == puntosParaGanar){
-        	resultado.ganaste()
-        }
-        self.dividirNumeros(puntos)
-        imagenUnidad = "imagenUnidad" + self.unidad().toString() +".png"
-        imagenDecena = "imagenDecena" + self.decena().toString() +".png"
-        imagenCentena ="imagenCentena" + self.centena().toString() +".png"
-        imagenMil = "imagenMil" + self.mil().toString() +".png"
-        
-        unidadTablero.cambiarNumero(imagenUnidad)
-        decenaTablero.cambiarNumero(imagenDecena)
-        centenaTablero.cambiarNumero(imagenCentena)
-        milTablero.cambiarNumero(imagenMil)
-    }
-
-    method dividirNumeros(numero){
-        if (numero.digits()==2){
-            decena = (numero / 10).truncate(0)
-            unidad = numero - (decena * 10)
-        }
-        else if (numero.digits()==3){
-            centena = (numero / 100).truncate(0)
-            decena = ((numero - (centena*100))/10).truncate(0)
-            unidad = numero - (centena*100 + decena*10)
-        }
-        else if(numero.digits()==4){
-            mil = (numero / 1000).truncate(0)
-            centena = ((numero - (mil * 1000) )/ 100).truncate(0)
-            decena = ((numero - (mil * 1000 + centena*100))/10).truncate(0)
-            unidad = numero - (mil * 1000 + centena*100 + decena*10)
-        }
-    }
-    
-    method reiniciar(){
-      unidad = 0
-      decena = 0
-      centena = 0
-      mil = 0
-      self.topoAplastado( (-puntos))
-    }
-    
-}
-
-object unidadTablero inherits NumerosTablero{
-	var imagen = "imagenUnidad0.png"
-
-	method position() = game.at(2,4)
-
-	method cambiarNumero(nuevoNumero) {
-		imagen = nuevoNumero
-	}
-	
-	method image() = imagen
-	
-	
-}
-
-object decenaTablero inherits NumerosTablero{
-	var imagen = "imagenDecena0.png"
-
-	method position() = game.at(2,4)
-
-	method cambiarNumero(nuevoNumero) {
-		imagen = nuevoNumero
-	}
-	
-	method image() = imagen
-}
-
-object centenaTablero inherits NumerosTablero{
-	var imagen = "imagenCentena0.png"
-
-	method position() = game.at(1,4)
-
-	method cambiarNumero(nuevoNumero) {
-		imagen = nuevoNumero
-	}
-	
-	method image() = imagen
-}
-
-object milTablero inherits NumerosTablero{
-	var imagen = "imagenMil0.png"
-
-	method position() = game.at(1,4)
-
-	method cambiarNumero(nuevoNumero) {
-		imagen = nuevoNumero
-	}
-	
-	method image() = imagen
-}
-
-
-object vida {
-
-	var property imagen = "3Vidas.png"
-
-	var property cantidadDeVida = 3
-
-	method position() = game.at(4,4)
-
-	method image() = imagen
-	
-	method cantidadDeVida() = cantidadDeVida
-
-	method pierdeVida() {
-		cantidadDeVida -= 1
-		imagen = cantidadDeVida.toString() + "Vidas.png"
-		if (cantidadDeVida == 0) {
-			resultado.perdiste()
-		}
-	}
-
-}
 
 object pantalla {
 	
@@ -161,93 +24,6 @@ object pantalla {
 	method enPantalla(posicion) = posicion.x().between(0,  limiteDePantallaAncho) && posicion.y().between(0, limiteDePantallaAlto)
 
 }
-
-class BotonDificultad{
-
-	const position = game.at(5, 3)
-	
-	var imagen = "boton.png"
-	
-	const milisegundos = 1000
-
-	method position() = position
-
-	method image() = imagen
-	
-	method aplastadoPorMartillo() {
-		imagen = "botonGolpeado.png"
-		game.schedule(550, { imagen = "boton.png"})
-		self.modificarDificultad(milisegundos)
-	}
-	
-	method modificarDificultad(tiempo){}
-	
-}
-
-
-class BotonSubirDificultad inherits BotonDificultad{
-	
-	
-	override method modificarDificultad(milisegundosARestar){
-    dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
-    dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
-    }
-}
-
-class BotonBajarDificultad inherits BotonDificultad{
-	
-	override method modificarDificultad(milisegundosASumar){
-	    dontwhackthecapybara.carpincho().bajarVelocidad(milisegundosASumar)
-	    dontwhackthecapybara.topos().forEach({topo => topo.bajarVelocidad(milisegundosASumar)})
-	}
-	
-	
-}
-
-class BotonesGameOver {
-	var property posicion = game.at(7, 7)
-	
-	method position() = posicion      							
-	
-	method moverAfuera(){
-		posicion = posicionFueraDeMapa.posicion()
-	}
-}
-
-object exitGame inherits BotonesGameOver {
-	 
-	 var imagen = "ExitGame.png"
-	 
-	 method image() = imagen
-	 
-	 method perder(){
-	 	self.posicion(game.at(1,0)) 
-	 }
-	 
-	 method aplastadoPorMartillo(){
-	 	imagen = "ExitGameAplastado.png"
-	 	game.schedule(500, { imagen = "ExitGame.png"})	
-	 	game.schedule(1000, { game.stop()})
-	 }
-}
-
-object playAgain inherits BotonesGameOver{
-	
-	var imagen = "PlayAgain.png"
-	 
-	method image() = imagen
-	
-	method perder(){
-	 	self.posicion(game.at(1,1)) 
-	 }
-	
-	method aplastadoPorMartillo(){
-		imagen = "PlayAgainAplastado.png"
-	 	game.schedule(500, { imagen = "PlayAgain.png"})
-		game.schedule(1200, { dontwhackthecapybara.reiniciar()})
-	} 
-}
-
 
 
 object martillo {
@@ -327,45 +103,67 @@ class Topo inherits Animal{
 	
 }
 
-object tablero{
-	const imagen = "score board.png"
+class BotonDificultad{
+
+	const position = game.at(5, 3)
 	
-	method position() = game.at(1,4)
+	var imagen = "boton.png"
 	
+	const milisegundos = 1000
+
+	method position() = position
+
 	method image() = imagen
 	
-	method aplastadoPorMartillo(){}
+	method aplastadoPorMartillo() {
+		imagen = "botonGolpeado.png"
+		game.schedule(550, { imagen = "boton.png"})
+		self.modificarDificultad(milisegundos)
+	}
+	
+	method modificarDificultad(tiempo){}
+	
 }
 
-object resultado{
-	var imagen = "victoria.png"
-	var property posicion = game.at(7,7)
+
+class BotonSubirDificultad inherits BotonDificultad{
 	
-	method perdiste() {
-		imagen = "GameOver.png"
-		dontwhackthecapybara.carpincho().movimiento(posicionFueraDeMapa)
-		dontwhackthecapybara.topos().forEach({topo => topo.movimiento(posicionFueraDeMapa)})
-		martillo.posicion(game.at(1,1))
-		pantalla.perder()
-		exitGame.perder()
-		playAgain.perder()
-		game.schedule(0, { self.posicion(game.at(0,0)) })
-		
+	
+	override method modificarDificultad(milisegundosARestar){
+    dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
+    dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
+    nivelDeDificultad.cambiarNivelDificultad(1)
+    }
+}
+
+class BotonBajarDificultad inherits BotonDificultad{
+	
+	override method modificarDificultad(milisegundosASumar){
+	    dontwhackthecapybara.carpincho().bajarVelocidad(milisegundosASumar)
+	    dontwhackthecapybara.topos().forEach({topo => topo.bajarVelocidad(milisegundosASumar)})
+	    nivelDeDificultad.cambiarNivelDificultad(-1)
 	}
+	
+	
+}
 
-	method ganaste() {
-		game.schedule(0, { self.posicion(game.at(0,0)) })
-        game.schedule(10000, { game.stop()})
-        game.sound("snd_music_victorytheme.ogg").play()
-	}
-
-
+object nivelDeDificultad{
+	const posicion = game.at(5,2)
+	var property imagen = "imagenMil1.png"
+	var nivel = 1
+	
 	method position() = posicion
-
+	
 	method image() = imagen
-
-
-	method moverAfuera(){
-		posicion = posicionFueraDeMapa.posicion()
+	
+	method cambiarNivelDificultad(numero){
+		nivel = 0.max(nivel + numero).min(4)
+		imagen = "imagenMil" + nivel.toString() +".png"
 	}
+	
+	
+		
 }
+
+
+
