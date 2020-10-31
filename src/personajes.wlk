@@ -149,7 +149,7 @@ class BotonBajarDificultad inherits BotonDificultad{
 
 object nivelDeDificultad{
 	const posicion = game.at(5,2)
-	var property imagen = "imagenMil1.png"
+	var property imagen = "imagenDificultad1.png"
 	var nivel = 1
 	
 	method position() = posicion
@@ -158,7 +158,7 @@ object nivelDeDificultad{
 	
 	method cambiarNivelDificultad(numero){
 		nivel = 0.max(nivel + numero).min(4)
-		imagen = "imagenMil" + nivel.toString() +".png"
+		imagen = "imagenDificultad" + nivel.toString() +".png"
 	}
 	
 	
