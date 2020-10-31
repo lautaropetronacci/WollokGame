@@ -207,8 +207,8 @@ object resultado{
 	
 	method perdiste() {
 		imagen = "GameOver.png"
-		dontwhackthecapybara.carpincho().movimiento(posicionFueraDeMapa)
-		dontwhackthecapybara.topos().forEach({topo => topo.movimiento(posicionFueraDeMapa)})
+		game.removeVisual(dontwhackthecapybara.carpincho())
+		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
 		martillo.posicion(game.at(1,1))
 		pantalla.perder()
 		exitGame.perder()

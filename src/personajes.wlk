@@ -61,9 +61,11 @@ class Animal {
 	method position() = movimiento.posicion()
 
 	method image() = imagen
-	
+
 	method agregarOnTick(){
 		game.onTick(milisegundos, "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+		//game.onTick((milisegundos - milisegundos/6).randomUpTo(milisegundos + milisegundos/6), "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+		//forma para randomizar la aparicion de los animales y que no se muevan todos al mismo tiempo
 	}
 	
 	method subirVelocidad(milisegundosARestar){

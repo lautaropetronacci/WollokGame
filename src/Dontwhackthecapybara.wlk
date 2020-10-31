@@ -71,15 +71,10 @@ object dontwhackthecapybara {
 		resultado.moverAfuera()
 		puntos.reiniciar()
 		pantalla.reiniciar()
-		
-		carpincho.movimiento(carpincho.movimientoAleatorio())
-		topos.forEach({topo => topo.movimiento(topo.movimientoAleatorio())})
-		
-		//game.addVisual(carpincho)
-		//self.topos().forEach({topo => game.addVisual(topo)})
-		
-		
-		topos.forEach({topo => topo.milisegundos(3600)})
+		game.addVisual(carpincho)
+		self.topos().forEach({topo => game.addVisual(topo)})
+		game.removeVisual(martillo)
+		game.addVisual(martillo)
 	}
 
 
