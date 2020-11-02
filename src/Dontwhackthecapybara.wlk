@@ -40,8 +40,8 @@ object dontwhackthecapybara {
 		game.addVisual(decenaTablero)
 		game.addVisual(centenaTablero)
 		game.addVisual(milTablero)
-		game.addVisual(exitGame)
-		game.addVisual(playAgain)
+		game.addVisual(exitGame)//E: agregarlo cuando se lo necesite?
+		game.addVisual(playAgain)//E: agregarlo cuando se lo necesite?
 		game.addVisual(martillo)
 		game.addVisual(resultado)
 		game.addVisual(nivelDeDificultad)
@@ -64,11 +64,11 @@ object dontwhackthecapybara {
 	}
 	
 	method reiniciar(){
-		exitGame.moverAfuera()
-		playAgain.moverAfuera()
-		vida.imagen("3Vidas.png")
+		exitGame.moverAfuera() // E: hacer un game.removeVisual(exitGame)
+		playAgain.moverAfuera()// E: hacer un game.removeVisual(platAgain)
+		vida.imagen("3Vidas.png")//E: crear metodo vida.reiniciar()
 		vida.cantidadDeVida(3)
-		resultado.moverAfuera()
+		resultado.moverAfuera()//E: crear metodo resultado.reiniciar()
 		puntos.reiniciar()
 		pantalla.reiniciar()
 		game.addVisual(carpincho)

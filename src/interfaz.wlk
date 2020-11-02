@@ -39,6 +39,8 @@ object puntos{
         	resultado.ganaste()
         }
         self.dividirNumeros(puntos)
+        
+        //E: Agrupar en un metodo ej: self.actualizarImagenPuntos()
         imagenUnidad = "imagenUnidad" + self.unidad().toString() +".png"
         imagenDecena = "imagenDecena" + self.decena().toString() +".png"
         imagenCentena ="imagenCentena" + self.centena().toString() +".png"

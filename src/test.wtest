@@ -8,34 +8,59 @@ import interfaz.*
 describe "Juego"{
 	
 	const topo = new Topo()
-	const boton1 = new BotonSubirDificultad()
-	const boton2 = new BotonBajarDificultad(position = game.at(5, 1)	)
+	const botonSubirDificultad = new BotonSubirDificultad()
+	const botonBajarDificualtad = new BotonBajarDificultad(position = game.at(5, 1)	)
 	
+	fixture{
+		dontwhackthecapybara.agregarPersonajes()
+		dontwhackthecapybara.activarAnimales()
+	}
 
     test "al golpear un topo 3 veces, sube la puntuacion" {
         3.times({ n => topo.aplastadoPorMartillo()})
         assert.equals(150, puntos.puntos())
     }
 
-    test "al golpear un carpincho una vez pierde una vida" {
-        dontwhackthecapybara.carpincho().aplastadoPorMartillo()
-        assert.equals(2, vida.cantidadDeVida())
-    }
-
-    test "Al presionar el boton rojo de arriba, aumenta la dificultad" {
-        boton1.aplastadoPorMartillo()
-        assert.equals(2, boton1.dificultad())
-    }
-
-    test "Al presionar el boton rojo de abajo, disminuye la dificultad" {
-        boton2.dificultad(2)
-        boton2.aplastadoPorMartillo()
-        assert.equals(1, boton2.dificultad())
-    }
-    
-	test "Al aplastar carpincho se pierde vida" {
+    test "Al golpear un carpincho pierde una vida" {
         dontwhackthecapybara.carpincho().aplastadoPorMartillo()
         assert.equals(2, vida.cantidadDeVida())
         assert.equals("2Vidas.png", vida.image())
     }
+
+    test "Al presionar el boton de subir dificultad, aumenta la velocidad y el nivel del juego" {
+        
+        botonSubirDificultad.aplastadoPorMartillo()
+        assert.equals(2600, dontwhackthecapybara.carpincho().milisegundos())
+        assert.that( dontwhackthecapybara.topos().all({untopo => untopo.milisegundos()==2600}))
+        assert.equals(2, nivelDeDificultad.nivel())
+    }
+
+    test "Al presionar el boton de bajar dificultad, disminuye la velocidad y el nivel del juego" {
+        
+        3.times({n => botonSubirDificultad.aplastadoPorMartillo()})
+        botonBajarDificualtad.aplastadoPorMartillo()
+        assert.equals(1600, dontwhackthecapybara.carpincho().milisegundos())
+        assert.that( dontwhackthecapybara.topos().all({untopo => untopo.milisegundos()==1600}))
+        assert.equals(3, nivelDeDificultad.nivel())
+    }
+    
+    test "Si se pierde las tres vidas se puede volver a jugar o salir"{
+    	3.times({n => dontwhackthecapybara.carpincho().aplastadoPorMartillo()})
+    	assert.that(game.hasVisual(exitGame))
+    	assert.that(game.hasVisual(playAgain))
+    }
+    
+    test "Reinicio de juego"{
+    	3.times({n => dontwhackthecapybara.carpincho().aplastadoPorMartillo()})
+    	//playAgain.aplastadoPorMartillo() ----> No funciona asi
+    	dontwhackthecapybara.reiniciar()
+    	//assert.notThat(game.hasVisual(exitGame))
+    	//assert.notThat(game.hasVisual(playAgain))
+    	assert.that(game.hasVisual(dontwhackthecapybara.carpincho()))
+    	assert.that(dontwhackthecapybara.topos().all({untopo => game.hasVisual(untopo)}))
+    	assert.equals (3, vida.cantidadDeVida())
+    	assert.equals(0, puntos.puntos())
+    }
+    
+	
 }

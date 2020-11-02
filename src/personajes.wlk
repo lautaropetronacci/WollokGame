@@ -132,9 +132,9 @@ class BotonSubirDificultad inherits BotonDificultad{
 	
 	
 	override method modificarDificultad(milisegundosARestar){
-    dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
-    dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
-    nivelDeDificultad.cambiarNivelDificultad(1)
+    	dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
+    	dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
+    	nivelDeDificultad.cambiarNivelDificultad(1)
     }
 }
 
@@ -153,6 +153,8 @@ object nivelDeDificultad{
 	const posicion = game.at(5,2)
 	var property imagen = "imagenDificultad1.png"
 	var nivel = 1
+	
+	method nivel()= nivel
 	
 	method position() = posicion
 	
