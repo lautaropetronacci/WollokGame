@@ -107,13 +107,13 @@ class Topo inherits Animal{
 
 class BotonDificultad{
 
-	const position = game.at(5, 3)
+	//const position = game.at(5, 3)
 	
 	var imagen = "boton.png"
 	
 	const milisegundos = 1000
 
-	method position() = position
+	//method position() = position
 
 	method image() = imagen
 	
@@ -128,9 +128,10 @@ class BotonDificultad{
 }
 
 
-class BotonSubirDificultad inherits BotonDificultad{
+object botonSubirDificultad inherits BotonDificultad{
 	
-	
+	const position = game.at(5, 3)
+	method position() = position
 	override method modificarDificultad(milisegundosARestar){
     	dontwhackthecapybara.carpincho().subirVelocidad(milisegundosARestar)
     	dontwhackthecapybara.topos().forEach({topo => topo.subirVelocidad(milisegundosARestar)})
@@ -138,8 +139,10 @@ class BotonSubirDificultad inherits BotonDificultad{
     }
 }
 
-class BotonBajarDificultad inherits BotonDificultad{
+object botonBajarDificultad inherits BotonDificultad{
 	
+	const position = game.at(5, 1)
+	method position() = position
 	override method modificarDificultad(milisegundosASumar){
 	    dontwhackthecapybara.carpincho().bajarVelocidad(milisegundosASumar)
 	    dontwhackthecapybara.topos().forEach({topo => topo.bajarVelocidad(milisegundosASumar)})

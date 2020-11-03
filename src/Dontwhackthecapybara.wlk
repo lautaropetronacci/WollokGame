@@ -8,8 +8,8 @@ object dontwhackthecapybara {
 	const property topos = #{new Topo(imagen = "topo.png"),new Topo(imagen = "topo.png"),new Topo(imagen = "topo.png") }
 	const property carpincho = new Carpincho(imagen = "carpincho.png")
 	
-	const botonSubirDificultad = new BotonSubirDificultad()
-	const botonBajarDificultad= new BotonBajarDificultad(position = game.at(5, 1)	)
+	//const botonSubirDificultad = new BotonSubirDificultad()
+	//const botonBajarDificultad= new BotonBajarDificultad(position = game.at(5, 1)	)
 	
 	
 	method iniciar() {
