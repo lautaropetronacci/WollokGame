@@ -73,13 +73,13 @@ class Animal {
 	
 	method subirVelocidad(milisegundosARestar){
 	    milisegundos = 600.max(milisegundos - milisegundosARestar)
-	    game.removeTickEvent("mover aleatoriamente") // ver si hay que cambiar nombre del onTick
+	    game.removeTickEvent("mover aleatoriamente") 
 	    self.agregarOnTick()
 	}
 	
 	method bajarVelocidad(milisegundosASumar){
 	    milisegundos = 4600.min(milisegundos + milisegundosASumar)
-	    game.removeTickEvent("mover aleatoriamente")// ver si hay que cambiar nombre del onTick
+	    game.removeTickEvent("mover aleatoriamente")
 	    self.agregarOnTick()
 	}
 
@@ -126,9 +126,7 @@ class BotonDificultad{
 		imagen = "botonGolpeado.png"
 		game.schedule(550, { imagen = "boton.png"})
 		tipoDeBoton.modificarDificultad(milisegundos)
-	}
-	
-	
+	}	
 }
 
 
@@ -142,9 +140,7 @@ object subirDificultad{
 }
 
 object bajarDificultad{
-	
-	
-	
+
 	method modificarDificultad(milisegundosASumar){
 	    dontwhackthecapybara.carpincho().bajarVelocidad(milisegundosASumar)
 	    dontwhackthecapybara.topos().forEach({topo => topo.bajarVelocidad(milisegundosASumar)})
