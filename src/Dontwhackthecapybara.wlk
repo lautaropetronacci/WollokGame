@@ -16,14 +16,14 @@ object dontwhackthecapybara {
 		self.configurarJuego()
 		self.agregarPersonajes()
 		self.configurarTeclas()
-		self.activarAnimales()
+		self.configurarAcciones()
 		game.start()
 		
 	}
 
 	method configurarJuego() {
 		game.title("Don't whack the capybara")
-		game.width(6)
+		game.width(8)
 		game.height(5)
 		game.cellSize(200)
 		game.boardGround("fondo.png")
@@ -45,6 +45,7 @@ object dontwhackthecapybara {
 		game.addVisual(martillo)
 		game.addVisual(resultado)
 		game.addVisual(nivelDeDificultad)
+		game.addVisual(reloj)
 	}
 
 	method configurarTeclas() {
@@ -58,9 +59,10 @@ object dontwhackthecapybara {
 	}
 
 		
-	method activarAnimales(){
+	method configurarAcciones(){
 		topos.forEach({topo => topo.agregarOnTick()})
 		carpincho.agregarOnTick()
+		reloj.agregarOnTick()
 	}
 	
 	method reiniciar(){
@@ -71,6 +73,7 @@ object dontwhackthecapybara {
 		resultado.moverAfuera()
 		puntos.reiniciar()
 		pantalla.reiniciar()
+		reloj.reiniciar()
 		game.addVisual(carpincho)
 		self.topos().forEach({topo => game.addVisual(topo)})
 		game.removeVisual(martillo)

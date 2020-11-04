@@ -13,7 +13,7 @@ describe "Juego"{
 	
 	fixture{
 		dontwhackthecapybara.agregarPersonajes()
-		dontwhackthecapybara.activarAnimales()
+		dontwhackthecapybara.configurarAcciones()
 	}
 
     test "al golpear un topo 3 veces, sube la puntuacion" {
@@ -60,7 +60,9 @@ describe "Juego"{
     	assert.that(dontwhackthecapybara.topos().all({untopo => game.hasVisual(untopo)}))
     	assert.equals (3, vida.cantidadDeVida())
     	assert.equals(0, puntos.puntos())
+    	assert.equals(120, reloj.tiempoRestante())
     }
+    
     
 	
 }

@@ -17,7 +17,7 @@ object tablero{
 
 object puntos{
     var puntos= 0
-    const puntosParaGanar = 2000
+    const puntosParaGanar = 2500
     var property imagenUnidad = "imagenUnidad0.png"
     var property imagenDecena = "imagenDecena0.png"
     var property imagenCentena = "imagenCentena0.png"
@@ -177,7 +177,8 @@ object playAgain inherits BotonesGameOver{
 	method aplastadoPorMartillo(){
 		imagen = "PlayAgainAplastado.png"
 	 	game.schedule(500, { imagen = "PlayAgain.png"})
-		game.schedule(1200, { dontwhackthecapybara.reiniciar()})
+		game.schedule(1200, { dontwhackthecapybara.reiniciar()
+		})
 	} 
 }
 
@@ -214,17 +215,25 @@ object resultado{
 		game.removeVisual(dontwhackthecapybara.carpincho())
 		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
 		martillo.posicion(game.at(1,1))
-		pantalla.perder()
+		pantalla.terminarJuego()
 		exitGame.perder()
 		playAgain.perder()
-		game.schedule(0, { self.posicion(game.at(0,0)) })
+		reloj.sacarTiempo()
+		self.posicion(game.at(0,0))
 		
 	}
 
 	method ganaste() {
-		game.schedule(0, { self.posicion(game.at(0,0)) })
-        game.schedule(10000, { game.stop()})
-        game.sound("snd_music_victorytheme.ogg").play()
+
+		imagen = "victoria.png"
+		self.posicion(game.at(0,1))
+		game.removeVisual(dontwhackthecapybara.carpincho())
+		dontwhackthecapybara.topos().forEach({topo => game.removeVisual(topo)})
+		martillo.posicion(game.at(1,1))
+		pantalla.terminarJuego()
+		exitGame.perder()
+		playAgain.perder()
+		reloj.sacarTiempo()
 	}
 
 
@@ -235,5 +244,37 @@ object resultado{
 
 	method moverAfuera(){
 		posicion = posicionFueraDeMapa.posicion()
+	}
+}
+
+object reloj{
+	var property imagen = "clock120.png"
+	
+	var property tiempoRestante = 120
+	
+	method image() = imagen
+
+	method position() = game.at(3,4)
+	
+	method actualizarImagen(){
+		tiempoRestante -= 20
+		if(tiempoRestante == 0) {
+			resultado.perdiste()
+		}
+		imagen = "clock" + tiempoRestante.toString() + ".png"
+	}
+	
+	method agregarOnTick(){
+		game.onTick(20000, "Actualizar reloj", {self.actualizarImagen()})
+	}
+	
+	method sacarTiempo(){
+		game.removeTickEvent("Actualizar reloj")
+	}
+	
+	method reiniciar() {
+		tiempoRestante = 120
+		imagen = "clock120.png"
+		self.agregarOnTick()
 	}
 }

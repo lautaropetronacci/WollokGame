@@ -8,10 +8,10 @@ import interfaz.*
 object pantalla {
 	
 	var limiteDePantallaSuperior = game.height() - 2
-	var limiteDePantallaDerecha = game.width() - 1
+	var limiteDePantallaDerecha = game.width() - 3
 	var limiteDePantallaIzquierda = 0
 	
-	method perder(){
+	method terminarJuego(){
 		limiteDePantallaSuperior = 1
 		limiteDePantallaDerecha = 1
 		limiteDePantallaIzquierda = 1
@@ -19,7 +19,7 @@ object pantalla {
 	
 	method reiniciar(){
 		limiteDePantallaSuperior = game.height() - 2
-		limiteDePantallaDerecha = game.width() - 1
+		limiteDePantallaDerecha = game.width() - 3
 		limiteDePantallaIzquierda = 0
 	}
 	
