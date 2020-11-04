@@ -7,21 +7,24 @@ import interfaz.*
 
 object pantalla {
 	
-	var limiteDePantallaAlto = game.height() - 2
-	var limiteDePantallaAncho = game.width() - 1
+	var limiteDePantallaSuperior = game.height() - 2
+	var limiteDePantallaDerecha = game.width() - 1
+	var limiteDePantallaIzquierda = 0
 	
 	method perder(){
-		limiteDePantallaAlto = 1
-		limiteDePantallaAncho = 1
+		limiteDePantallaSuperior = 1
+		limiteDePantallaDerecha = 1
+		limiteDePantallaIzquierda = 1
 	}
 	
 	method reiniciar(){
-		limiteDePantallaAlto = game.height() - 2
-		limiteDePantallaAncho = game.width() - 1
+		limiteDePantallaSuperior = game.height() - 2
+		limiteDePantallaDerecha = game.width() - 1
+		limiteDePantallaIzquierda = 0
 	}
 	
 	
-	method enPantalla(posicion) = posicion.x().between(0,  limiteDePantallaAncho) && posicion.y().between(0, limiteDePantallaAlto)
+	method enPantalla(posicion) = posicion.x().between(limiteDePantallaIzquierda,  limiteDePantallaDerecha) && posicion.y().between(0, limiteDePantallaSuperior)
 
 }
 
@@ -63,8 +66,8 @@ class Animal {
 	method image() = imagen
 
 	method agregarOnTick(){
-		game.onTick(milisegundos, "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
-		//game.onTick((milisegundos - milisegundos/6).randomUpTo(milisegundos + milisegundos/6), "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+		//game.onTick(milisegundos, "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
+		game.onTick((milisegundos - milisegundos/6).randomUpTo(milisegundos + milisegundos/6), "mover aleatoriamente", { self.movimientoAleatorio().nuevaPosicion()})
 		//forma para randomizar la aparicion de los animales y que no se muevan todos al mismo tiempo
 	}
 	
