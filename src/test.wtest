@@ -52,7 +52,7 @@ describe "Juego"{
     
     test "Reinicio de juego"{
     	3.times({n => dontwhackthecapybara.carpincho().aplastadoPorMartillo()})
-    	//playAgain.aplastadoPorMartillo()// ----> No funciona asi
+    	//playAgain.aplastadoPorMartillo()// ----> No funciona asi por el game.schedule
     	dontwhackthecapybara.reiniciar()
     	assert.that(exitGame.posicion() == posicionFueraDeMapa.posicion())
     	assert.that(playAgain.posicion() == posicionFueraDeMapa.posicion())

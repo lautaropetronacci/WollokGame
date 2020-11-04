@@ -54,7 +54,6 @@ object martillo {
 }
 
 
-
 class Animal {
 	const imagen = null
 	const property movimientoAleatorio = new Aleatorio()
